@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ILS – Institute of Liberal Studies | Coimbatore</title>
+    <meta name="description" content="Institute of Liberal Studies, Coimbatore – 50+ years of free learning every Sunday at R.S. Puram. Join Session 58.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,500;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <style>
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    :root{
+        --navy:#05142B;--royal:#1B3F8A;--bright:#2563EB;--sky:#93C5FD;
+        --white:#FFFFFF;--cream:#EEF5FF;--gold:#C9A040;--gold-l:#E8C96A;
+        --t-dk:#0F172A;--t-md:#334155;--t-lt:#64748B;--bdr:#D4E4FB;
+    }
+    html{scroll-behavior:smooth}
+    body{font-family:'DM Sans',sans-serif;color:var(--t-dk);background:var(--white);overflow-x:hidden}
+
+    /* NAV */
+    nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:1.1rem 4rem;display:flex;align-items:center;justify-content:space-between;transition:all .4s}
+    nav.scrolled{background:rgba(5,20,43,.97);backdrop-filter:blur(16px);padding:.75rem 4rem;box-shadow:0 4px 30px rgba(0,0,0,.35)}
+    .nav-left{display:flex;align-items:center;gap:.85rem;text-decoration:none}
+    .logo-img-wrap{background:#fff;border-radius:9px;padding:5px 8px;display:flex;align-items:center;justify-content:center;height:48px;min-width:48px;box-shadow:0 2px 10px rgba(0,0,0,.2)}
+    .logo-img-wrap img{height:34px;width:auto;display:block}
+    .logo-fallback{width:38px;height:38px;background:linear-gradient(135deg,var(--bright),var(--sky));border-radius:7px;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-weight:700;font-size:1.2rem;color:#fff}
+    .nav-wordmark{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:600;color:#fff;line-height:1.2}
+    .nav-wordmark span{display:block;font-family:'DM Sans',sans-serif;font-size:.6rem;color:var(--sky);letter-spacing:1.8px;text-transform:uppercase}
+    .nav-right{display:flex;align-items:center;gap:1.8rem}
+    .nav-links{display:flex;gap:2rem;list-style:none}
+    .nav-links a{text-decoration:none;color:rgba(255,255,255,.72);font-size:.8rem;font-weight:500;letter-spacing:.5px;text-transform:uppercase;transition:color .25s;position:relative}
+    .nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:var(--gold);transition:width .3s}
+    .nav-links a:hover{color:var(--gold-l)}
+    .nav-links a:hover::after{width:100%}
+    .nav-socials{display:flex;gap:.6rem}
+    .nav-soc{width:30px;height:30px;border-radius:6px;border:1px solid rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;text-decoration:none;transition:all .25s}
+    .nav-soc:hover{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.45)}
+    .nav-soc svg{width:14px;height:14px;fill:rgba(255,255,255,.7)}
+    .nav-cta{background:var(--gold);color:var(--navy);padding:.42rem 1.1rem;border-radius:6px;font-weight:600;font-size:.78rem;text-decoration:none;transition:all .25s;white-space:nowrap}
+    .nav-cta:hover{background:var(--gold-l);transform:translateY(-1px)}
+    .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
+    .hamburger span{width:22px;height:2px;background:#fff;border-radius:2px;transition:all .3s;display:block}
+    .hamburger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+    .hamburger.open span:nth-child(2){opacity:0}
+    .hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+
+    /* MOBILE MENU */
+    .mobile-menu{display:none;position:fixed;inset:0;background:rgba(5,20,43,.98);z-index:999;flex-direction:column;align-items:center;justify-content:center;gap:2rem}
+    .mobile-menu.open{display:flex}
+    .mobile-menu a{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:600;color:#fff;text-decoration:none;transition:color .2s}
+    .mobile-menu a:hover{color:var(--gold-l)}
+    .m-cta{background:var(--gold)!important;color:var(--navy)!important;font-family:'DM Sans',sans-serif!important;font-size:1rem!important;padding:.7rem 2rem;border-radius:8px;font-weight:600!important}
+    .m-close{position:absolute;top:1.5rem;right:1.5rem;background:none;border:none;cursor:pointer;color:#fff;font-size:1.5rem;padding:.5rem}
+    .m-socials{display:flex;gap:1rem}
+    .m-socials a{color:rgba(255,255,255,.55)!important;font-family:'DM Sans',sans-serif!important;font-size:.85rem!important}
+
+    /* HERO */
+    #hero{position:relative;height:100vh;min-height:640px;display:flex;align-items:center;overflow:hidden}
+    #three-canvas{position:absolute;inset:0;width:100%;height:100%}
+    .hero-overlay{position:absolute;inset:0;background:linear-gradient(120deg,rgba(5,20,43,.9) 0%,rgba(27,63,138,.52) 55%,rgba(5,20,43,.78) 100%)}
+    .hero-content{position:relative;z-index:10;padding:0 4rem;max-width:660px}
+    .hero-badge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(201,160,64,.14);border:1px solid rgba(201,160,64,.38);color:var(--gold-l);padding:.36rem .9rem;border-radius:100px;font-size:.7rem;font-weight:600;letter-spacing:1.8px;text-transform:uppercase;margin-bottom:1.5rem}
+    .hero-badge::before{content:'';width:6px;height:6px;background:var(--gold);border-radius:50%;animation:blink 2s ease infinite}
+    @keyframes blink{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(1.5)}}
+    .hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2.8rem,5.5vw,4.8rem);font-weight:700;color:#fff;line-height:1.08;margin-bottom:.55rem}
+    .hero-title .ac{color:var(--sky)}
+    .hero-sub{font-family:'Cormorant Garamond',serif;font-size:clamp(1.1rem,2.2vw,1.45rem);font-weight:300;font-style:italic;color:rgba(255,255,255,.62);margin-bottom:1.3rem}
+    .hero-copy{font-size:.92rem;color:rgba(255,255,255,.52);line-height:1.8;max-width:460px;margin-bottom:2.2rem}
+    .hero-stats{display:flex;gap:2.2rem;margin-bottom:2.2rem}
+    .stat{border-left:2px solid var(--gold);padding-left:.9rem}
+    .stat-n{font-family:'Cormorant Garamond',serif;font-size:2.1rem;font-weight:700;color:#fff;line-height:1}
+    .stat-l{font-size:.68rem;color:rgba(255,255,255,.42);text-transform:uppercase;letter-spacing:1.2px;margin-top:.2rem}
+    .hero-btns{display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+    .btn-gold{background:var(--gold);color:var(--navy);padding:.85rem 1.9rem;border-radius:8px;text-decoration:none;font-weight:600;font-size:.86rem;display:inline-flex;align-items:center;gap:.4rem;transition:all .3s}
+    .btn-gold:hover{background:var(--gold-l);transform:translateY(-2px);box-shadow:0 8px 24px rgba(201,160,64,.4)}
+    .btn-outline{color:#fff;padding:.85rem 1.4rem;border:1px solid rgba(255,255,255,.26);border-radius:8px;text-decoration:none;font-size:.86rem;font-weight:500;transition:all .3s}
+    .btn-outline:hover{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.5)}
+    .scroll-cue{position:absolute;bottom:2.2rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.4rem;color:rgba(255,255,255,.3);font-size:.62rem;letter-spacing:2.5px;text-transform:uppercase;z-index:10}
+    .scroll-line{width:1px;height:44px;background:linear-gradient(to bottom,transparent,rgba(255,255,255,.28));animation:scl 2s ease infinite}
+    @keyframes scl{0%,100%{transform:scaleY(1);opacity:.5}50%{transform:scaleY(1.4);opacity:1}}
+
+    /* SECTIONS */
+    section{padding:6rem 4rem}
+    .section-label{font-size:.7rem;font-weight:600;letter-spacing:2.8px;text-transform:uppercase;color:var(--bright);margin-bottom:.6rem}
+    .section-title{font-family:'Cormorant Garamond',serif;font-size:clamp(1.9rem,3.8vw,2.9rem);font-weight:700;color:var(--navy);line-height:1.12}
+    .divider{width:52px;height:3px;background:linear-gradient(to right,var(--gold),transparent);margin:1.3rem 0 1.8rem}
+    .fade-up{opacity:0;transform:translateY(26px);transition:opacity .65s ease,transform .65s ease}
+    .fade-up.visible{opacity:1;transform:translateY(0)}
+
+    /* ABOUT */
+    #about{background:var(--cream)}
+    .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;max-width:1200px;margin:0 auto}
+    .about-body p{font-size:1rem;line-height:1.88;color:var(--t-md);margin-bottom:1.1rem}
+    .about-body strong{color:var(--royal);font-weight:600}
+    .info-block{margin-top:1.8rem;padding:1.4rem;background:#fff;border-radius:14px;border-left:4px solid var(--gold);box-shadow:0 4px 24px rgba(0,0,0,.06);display:flex;flex-direction:column;gap:.9rem}
+    .info-row{display:flex;align-items:flex-start;gap:1rem}
+    .info-icon{width:36px;height:36px;border-radius:8px;background:linear-gradient(135deg,var(--bright),var(--royal));display:flex;align-items:center;justify-content:center;color:#fff;font-size:.88rem;flex-shrink:0}
+    .info-lbl{font-size:.68rem;text-transform:uppercase;letter-spacing:1.2px;color:var(--t-lt);font-weight:600;margin-bottom:.18rem}
+    .info-val{font-size:.9rem;color:var(--t-dk);font-weight:500}
+    .theme-card{background:linear-gradient(135deg,var(--navy),var(--royal));border-radius:20px;padding:2.4rem;color:#fff;box-shadow:0 20px 60px rgba(5,20,43,.25)}
+    .theme-lbl{font-size:.66rem;text-transform:uppercase;letter-spacing:2.5px;color:var(--sky);font-weight:600;margin-bottom:.85rem}
+    .theme-heading{font-family:'Cormorant Garamond',serif;font-size:2.3rem;font-weight:700;line-height:1.15;margin-bottom:.55rem}
+    .theme-note{font-size:.84rem;color:rgba(255,255,255,.52);font-style:italic;margin-bottom:1.4rem;line-height:1.6}
+    .tags{display:flex;flex-wrap:wrap;gap:.45rem;margin-bottom:1.7rem}
+    .tag{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.16);padding:.28rem .72rem;border-radius:100px;font-size:.72rem;color:rgba(255,255,255,.72)}
+    .hl-row{display:flex;gap:1.2rem;padding-top:1.4rem;border-top:1px solid rgba(255,255,255,.1)}
+    .hl{flex:1;text-align:center}
+    .hl-n{font-family:'Cormorant Garamond',serif;font-size:1.85rem;font-weight:700;color:var(--gold-l);line-height:1}
+    .hl-l{font-size:.62rem;color:rgba(255,255,255,.42);text-transform:uppercase;letter-spacing:1px;margin-top:.22rem}
+
+    /* SESSION 58 */
+    #session{background:#fff}
+    .session-inner{max-width:1200px;margin:0 auto}
+    .bearers-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.3rem;margin-top:2.8rem}
+    .bearer-card{background:#fff;border:1px solid var(--bdr);border-radius:18px;padding:1.9rem 1.4rem;text-align:center;transition:all .3s;position:relative;overflow:hidden}
+    .bearer-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(to right,var(--bright),var(--sky))}
+    .bearer-card:hover{transform:translateY(-6px);box-shadow:0 14px 40px rgba(27,63,138,.12);border-color:var(--sky)}
+    .b-av{width:60px;height:60px;border-radius:50%;margin:0 auto 1rem;background:linear-gradient(135deg,var(--bright),var(--royal));display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:700;color:#fff}
+    .b-role{font-size:.66rem;text-transform:uppercase;letter-spacing:1.8px;color:var(--bright);font-weight:600;margin-bottom:.32rem}
+    .b-name{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:600;color:var(--navy);line-height:1.3}
+    .ec-wrap{margin-top:2.8rem}
+    .ec-title{font-family:'Cormorant Garamond',serif;font-size:1.35rem;font-weight:600;color:var(--navy);margin-bottom:.35rem}
+    .ec-sub{font-size:.82rem;color:var(--t-lt);margin-bottom:1.3rem}
+    .ec-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:.9rem}
+    .ec-card{background:var(--cream);border:1px solid var(--bdr);border-radius:12px;padding:1.3rem 1rem;text-align:center;transition:all .3s}
+    .ec-card:hover{background:#fff;border-color:var(--bright);box-shadow:0 4px 20px rgba(37,99,235,.1)}
+    .ec-av{width:44px;height:44px;border-radius:50%;margin:0 auto .65rem;background:linear-gradient(135deg,#3B82F6,#1E3A8A);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-weight:700;color:#fff}
+    .ec-name{font-size:.82rem;font-weight:600;color:var(--navy);line-height:1.35}
+
+    /* PROGRAMMES */
+    #programmes{background:var(--navy)}
+    #programmes .section-label{color:var(--sky)}
+    #programmes .section-title{color:#fff}
+    .prog-inner{max-width:1200px;margin:0 auto}
+    .prog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.3rem;margin-top:2.8rem}
+    .prog-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:18px;padding:1.9rem;transition:all .4s}
+    .prog-card:hover{background:rgba(37,99,235,.2);border-color:rgba(147,197,253,.32);transform:translateY(-5px)}
+    .prog-icon{font-size:2rem;margin-bottom:.9rem}
+    .prog-name{font-family:'Cormorant Garamond',serif;font-size:1.28rem;font-weight:600;color:#fff;margin-bottom:.4rem}
+    .prog-desc{font-size:.82rem;color:rgba(255,255,255,.46);line-height:1.65}
+    .memorial-row{display:grid;grid-template-columns:1fr 1fr;gap:1.3rem;margin-top:1.8rem}
+    .memorial-card{background:rgba(201,160,64,.09);border:1px solid rgba(201,160,64,.26);border-radius:18px;padding:1.9rem}
+    .memorial-lbl{font-size:.66rem;text-transform:uppercase;letter-spacing:2px;color:var(--gold);font-weight:600;margin-bottom:.55rem}
+    .memorial-name{font-family:'Cormorant Garamond',serif;font-size:1.32rem;font-weight:600;color:#fff;margin-bottom:.38rem}
+    .memorial-note{font-size:.8rem;color:rgba(255,255,255,.42);line-height:1.6}
+
+    /* ═══════════════════════════════════════════
+       WEEKLY PROCEEDINGS — PREMIUM
+    ═══════════════════════════════════════════ */
+    #proceedings{background:var(--t-dk);padding:6rem 0;overflow:hidden}
+    .proc-header{padding:0 4rem;max-width:1200px;margin:0 auto 3.5rem;display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+    .proc-header .section-label{color:var(--sky)}
+    .proc-header .section-title{color:#fff}
+    .live-pill{display:flex;align-items:center;gap:.5rem;background:rgba(37,99,235,.2);border:1px solid rgba(37,99,235,.4);border-radius:100px;padding:.4rem 1rem}
+    .live-dot{width:7px;height:7px;border-radius:50%;background:#22c55e;animation:blink 1.5s ease infinite}
+    .live-text{font-size:.74rem;font-weight:600;color:var(--sky);letter-spacing:.5px}
+
+    .proc-current{max-width:1200px;margin:0 auto;padding:0 4rem}
+    .proc-split{display:grid;grid-template-columns:1fr 1fr;gap:0;border-radius:24px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.5);position:relative}
+    .proc-watermark{position:absolute;bottom:-1rem;right:2rem;font-family:'Cormorant Garamond',serif;font-size:14rem;font-weight:700;color:rgba(255,255,255,.04);line-height:1;pointer-events:none;z-index:0;letter-spacing:-4px;user-select:none}
+
+    .proc-panel{position:relative;overflow:hidden;min-height:460px;display:flex;flex-direction:column}
+    .proc-panel-l{background:#0d1f3e}
+    .proc-panel-r{background:#081428;border-left:1px solid rgba(255,255,255,.06)}
+    .proc-panel-img{width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0;z-index:1;transition:transform .6s ease}
+    .proc-panel:hover .proc-panel-img{transform:scale(1.04)}
+    .proc-panel-overlay{position:absolute;inset:0;z-index:2;background:linear-gradient(to top,rgba(5,20,43,.85) 0%,rgba(5,20,43,.1) 60%,transparent 100%)}
+    .proc-placeholder{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.9rem;padding:3rem}
+    .proc-ph-icon{font-size:2.5rem;opacity:.22}
+    .proc-ph-t1{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:500;color:rgba(255,255,255,.32)}
+    .proc-ph-t2{font-size:.74rem;color:rgba(255,255,255,.2);font-style:italic;text-align:center;line-height:1.6}
+    .proc-panel-top{position:relative;z-index:3;padding:1.4rem 1.8rem;display:flex;align-items:center;gap:.6rem}
+    .p-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+    .p-dot.inv{background:var(--gold)}
+    .p-dot.pho{background:var(--bright)}
+    .p-lbl{font-size:.7rem;font-weight:600;text-transform:uppercase;letter-spacing:1.8px;color:rgba(255,255,255,.5)}
+    .proc-panel-bot{position:relative;z-index:3;padding:1.4rem 1.8rem;margin-top:auto}
+    .proc-week{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:600;color:#fff}
+    .proc-sess{font-size:.66rem;color:rgba(255,255,255,.38);text-transform:uppercase;letter-spacing:1.2px;margin-top:.15rem}
+
+    /* Archive */
+    .proc-archive{max-width:1200px;margin:3rem auto 0;padding:0 4rem}
+    .archive-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;border-top:1px solid rgba(255,255,255,.06);padding-top:2rem}
+    .archive-title{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:600;color:rgba(255,255,255,.55)}
+    .archive-count{font-size:.72rem;color:rgba(255,255,255,.28);letter-spacing:1px;text-transform:uppercase}
+    .archive-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1.1rem}
+    .archive-item{background:#0d1f3e;border-radius:14px;overflow:hidden;border:1px solid rgba(255,255,255,.06);transition:all .3s}
+    .archive-item:hover{border-color:rgba(37,99,235,.4);transform:translateY(-3px);box-shadow:0 8px 28px rgba(0,0,0,.4)}
+    .archive-img-wrap{position:relative;aspect-ratio:4/3;overflow:hidden}
+    .archive-img-wrap img{width:100%;height:100%;object-fit:cover;transition:transform .4s ease}
+    .archive-item:hover .archive-img-wrap img{transform:scale(1.06)}
+    .archive-badge{position:absolute;top:.5rem;right:.5rem;background:rgba(5,20,43,.8);border:1px solid rgba(255,255,255,.12);border-radius:4px;padding:.2rem .45rem;font-size:.6rem;color:rgba(255,255,255,.6);font-weight:600;letter-spacing:.5px;text-transform:uppercase}
+    .archive-lbl{padding:.7rem .9rem;display:flex;align-items:center;justify-content:space-between}
+    .archive-week{font-family:'Cormorant Garamond',serif;font-size:.95rem;font-weight:600;color:rgba(255,255,255,.7)}
+    .archive-type{font-size:.62rem;color:rgba(255,255,255,.28);text-transform:uppercase;letter-spacing:1px}
+
+    .proc-empty{text-align:center;padding:5rem 2rem}
+    .proc-empty-icon{font-size:3rem;opacity:.18;margin-bottom:1rem}
+    .proc-empty-title{font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:rgba(255,255,255,.38);margin-bottom:.6rem}
+    .proc-empty-text{font-size:.82rem;color:rgba(255,255,255,.2);line-height:1.75}
+
+    /* CONTACT */
+    #contact{background:#fff}
+    .contact-inner{max-width:1200px;margin:0 auto}
+    .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;margin-top:2.8rem}
+    .c-cards{display:flex;flex-direction:column;gap:1.1rem}
+    .c-card{display:flex;gap:1.1rem;align-items:flex-start;padding:1.4rem;background:var(--cream);border-radius:14px;border:1px solid var(--bdr);transition:all .3s}
+    .c-card:hover{border-color:var(--bright);background:#fff;box-shadow:0 4px 20px rgba(37,99,235,.08)}
+    .c-icon{width:42px;height:42px;border-radius:10px;background:linear-gradient(135deg,var(--bright),var(--royal));display:flex;align-items:center;justify-content:center;color:#fff;font-size:1rem;flex-shrink:0}
+    .c-lbl{font-size:.68rem;text-transform:uppercase;letter-spacing:1.2px;color:var(--t-lt);font-weight:600;margin-bottom:.18rem}
+    .c-val{font-size:.92rem;color:var(--t-dk);font-weight:500;line-height:1.55}
+    .c-val a{color:var(--bright);text-decoration:none}
+    .c-val a:hover{text-decoration:underline}
+    .social-row{display:flex;gap:.8rem;margin-top:1.1rem;flex-wrap:wrap}
+    .soc-btn{display:flex;align-items:center;gap:.6rem;padding:.65rem 1.1rem;border-radius:10px;text-decoration:none;font-size:.8rem;font-weight:600;transition:all .3s;border:1px solid transparent}
+    .soc-btn svg{width:16px;height:16px;flex-shrink:0}
+    .soc-btn.fb{background:#1877F2;color:#fff}
+    .soc-btn.fb:hover{background:#1565d8;transform:translateY(-2px)}
+    .soc-btn.ig{background:linear-gradient(135deg,#833AB4,#E1306C,#F77737);color:#fff}
+    .soc-btn.ig:hover{opacity:.9;transform:translateY(-2px)}
+    .join-cta{background:linear-gradient(135deg,var(--navy),var(--royal));border-radius:24px;padding:2.8rem;color:#fff}
+    .free-tag{display:inline-block;background:var(--gold);color:var(--navy);padding:.26rem .72rem;border-radius:6px;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:1.1rem}
+    .join-cta h3{font-family:'Cormorant Garamond',serif;font-size:1.9rem;font-weight:700;line-height:1.2;margin-bottom:.9rem}
+    .join-cta p{font-size:.88rem;color:rgba(255,255,255,.62);line-height:1.75;margin-bottom:1.1rem}
+    .cta-bullets{display:flex;flex-direction:column;gap:.6rem;margin-bottom:1.7rem}
+    .cta-bullet{display:flex;align-items:center;gap:.7rem;color:rgba(255,255,255,.72);font-size:.86rem}
+    .cta-bullet span{color:var(--gold);font-weight:700}
+    .btn-gold-sm{background:var(--gold);color:var(--navy);text-decoration:none;padding:.82rem 1.7rem;border-radius:8px;font-weight:600;font-size:.86rem;display:inline-block;transition:all .3s}
+    .btn-gold-sm:hover{background:var(--gold-l);transform:translateY(-2px)}
+
+    /* FOOTER */
+    footer{background:var(--navy);padding:2.5rem 4rem}
+    .footer-main{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1.5rem;margin-bottom:1.5rem;padding-bottom:1.5rem;border-bottom:1px solid rgba(255,255,255,.07)}
+    .f-logo{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:600;color:#fff}
+    .f-logo span{display:block;font-family:'DM Sans',sans-serif;font-size:.6rem;color:var(--sky);letter-spacing:1.6px;text-transform:uppercase;margin-top:.2rem}
+    .f-socials{display:flex;gap:.7rem}
+    .f-soc{width:32px;height:32px;border-radius:7px;border:1px solid rgba(255,255,255,.14);display:flex;align-items:center;justify-content:center;text-decoration:none;transition:all .25s}
+    .f-soc:hover{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.35)}
+    .f-soc svg{width:14px;height:14px;fill:rgba(255,255,255,.6)}
+    .f-session{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);border-radius:7px;padding:.42rem .85rem;font-size:.74rem;color:rgba(255,255,255,.42)}
+    .f-session strong{color:var(--gold)}
+    .footer-copy{text-align:center;font-size:.74rem;color:rgba(255,255,255,.25)}
+
+    /* RESPONSIVE */
+    @media(max-width:1024px){
+        .bearers-grid{grid-template-columns:repeat(2,1fr)}
+        .ec-grid{grid-template-columns:repeat(3,1fr)}
+        .prog-grid{grid-template-columns:repeat(2,1fr)}
+        .memorial-row{grid-template-columns:1fr}
+        .proc-split{grid-template-columns:1fr}
+        .proc-panel-r{border-left:none;border-top:1px solid rgba(255,255,255,.06)}
+        .proc-panel{min-height:320px}
+    }
+    @media(max-width:768px){
+        nav,nav.scrolled{padding:1rem 1.5rem}
+        .nav-links,.nav-socials,.nav-cta{display:none}
+        .hamburger{display:flex}
+        section{padding:4rem 1.5rem}
+        #proceedings{padding:4rem 0}
+        .proc-header,.proc-current,.proc-archive{padding:0 1.5rem}
+        .hero-content{padding:0 1.5rem}
+        .about-grid,.contact-grid{grid-template-columns:1fr;gap:2rem}
+        .bearers-grid{grid-template-columns:repeat(2,1fr)}
+        .ec-grid{grid-template-columns:repeat(2,1fr)}
+        .prog-grid{grid-template-columns:1fr}
+        footer{padding:2rem 1.5rem}
+        .footer-main{flex-direction:column;align-items:flex-start}
+        .proc-watermark{font-size:8rem}
+    }
+    @media(max-width:480px){
+        .hero-title{font-size:2.5rem}
+        .hero-btns{flex-direction:column;align-items:flex-start}
+        .ec-grid{grid-template-columns:repeat(2,1fr)}
+        .archive-grid{grid-template-columns:repeat(2,1fr)}
+    }
+    </style>
+</head>
+<body>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+    <button class="m-close" onclick="closeMobile()">✕</button>
+    <a href="#about"       onclick="closeMobile()">About</a>
+    <a href="#session"     onclick="closeMobile()">Session 58</a>
+    <a href="#programmes"  onclick="closeMobile()">Programmes</a>
+    <a href="#proceedings" onclick="closeMobile()">Proceedings</a>
+    <a href="#contact"     onclick="closeMobile()" class="m-cta">Join ILS Free</a>
+    <div class="m-socials">
+        <a href="https://www.instagram.com/ils.coimbatore/" target="_blank">Instagram</a>
+        <span style="color:rgba(255,255,255,.2)">·</span>
+        <a href="https://www.facebook.com/ilscoimbatore/" target="_blank">Facebook</a>
+    </div>
+</div>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+    <a href="#" class="nav-left">
+        <div class="logo-img-wrap">
+            <img src="images/ils-logo.png" alt="ILS Logo"
+                 onerror="this.parentElement.innerHTML='<div class=\'logo-fallback\'>ILS</div>'">
+        </div>
+        <div class="nav-wordmark">
+            Institute of Liberal Studies
+            <span>Coimbatore · Est. 1967</span>
+        </div>
+    </a>
+    <div class="nav-right">
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#session">Session 58</a></li>
+            <li><a href="#programmes">Programmes</a></li>
+            <li><a href="#proceedings">Proceedings</a></li>
+        </ul>
+        <div class="nav-socials">
+            <a href="https://www.instagram.com/ils.coimbatore/" target="_blank" rel="noopener" class="nav-soc" title="Instagram">
+                <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+            </a>
+            <a href="https://www.facebook.com/ilscoimbatore/" target="_blank" rel="noopener" class="nav-soc" title="Facebook">
+                <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            </a>
+        </div>
+        <a href="#contact" class="nav-cta">Join ILS</a>
+    </div>
+    <div class="hamburger" id="hamburger" onclick="toggleMobile()">
+        <span></span><span></span><span></span>
+    </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+    <canvas id="three-canvas"></canvas>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+        <div class="hero-badge">Session 58 · FY 2025–26 · Now Active</div>
+        <h1 class="hero-title">Institute of<br><span class="ac">Liberal Studies</span></h1>
+        <p class="hero-sub">An Experiment in Learning</p>
+        <p class="hero-copy">A gathering of curious minds in Coimbatore. Every Sunday, we meet to share knowledge, exchange ideas, and grow together. Free membership. All are welcome.</p>
+        <div class="hero-stats">
+            <div class="stat"><div class="stat-n">58</div><div class="stat-l">Sessions</div></div>
+            <div class="stat"><div class="stat-n">50+</div><div class="stat-l">Years</div></div>
+            <div class="stat"><div class="stat-n">1000+</div><div class="stat-l">Lives Shaped</div></div>
+        </div>
+        <div class="hero-btns">
+            <a href="#contact" class="btn-gold">✦ Join ILS Free</a>
+            <a href="#about"   class="btn-outline">Discover More</a>
+        </div>
+    </div>
+    <div class="scroll-cue"><div class="scroll-line"></div>Scroll</div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+    <div class="about-grid">
+        <div class="about-body fade-up">
+            <div class="section-label">Who We Are</div>
+            <h2 class="section-title">A Haven for Those Who Seek Knowledge</h2>
+            <div class="divider"></div>
+            <p>The <strong>Institute of Liberal Studies (ILS)</strong> is an organisation devoted to learning. With over 50 years of continuous service, ILS has shaped the thoughts and attitudes of more than a thousand people across Coimbatore.</p>
+            <p>Every week, ILS presents a two-part programme. First — our signature <strong>Minute a Member</strong> — gives every member one minute to share anything under the sun. The second part brings guest lectures, debates, quizzes, group discussions, and more.</p>
+            <p>ILS is open to all who have the desire to <strong>listen, learn, and lead</strong>. Membership is free, for life, for all ages and genders.</p>
+            <div class="info-block">
+                <div class="info-row"><div class="info-icon">📅</div><div><div class="info-lbl">When</div><div class="info-val">Every Sunday at 4:00 PM</div></div></div>
+                <div class="info-row"><div class="info-icon">📍</div><div><div class="info-lbl">Where</div><div class="info-val">Thulasi Pharmacy, R.S. Puram, Coimbatore</div></div></div>
+                <div class="info-row"><div class="info-icon">⏱</div><div><div class="info-lbl">Duration</div><div class="info-val">Two hours · 48–52 proceedings per Session</div></div></div>
+            </div>
+        </div>
+        <div class="fade-up">
+            <div class="theme-card">
+                <div class="theme-lbl">Our Core Philosophy</div>
+                <div class="theme-heading">Experiment<br>in Learning</div>
+                <div class="theme-note">Learning through sharing. Growing through listening. Shaping the community through thought.</div>
+                <div class="tags"><span class="tag">Listen</span><span class="tag">Learn</span><span class="tag">Lead</span><span class="tag">Share</span><span class="tag">Grow</span><span class="tag">Think</span></div>
+                <div class="hl-row">
+                    <div class="hl"><div class="hl-n">58</div><div class="hl-l">Sessions</div></div>
+                    <div class="hl"><div class="hl-n">50+</div><div class="hl-l">Years</div></div>
+                    <div class="hl"><div class="hl-n">Free</div><div class="hl-l">For Life</div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SESSION 58 -->
+<section id="session">
+    <div class="session-inner">
+        <div class="fade-up">
+            <div class="section-label">Current Year</div>
+            <h2 class="section-title">Session 58 · FY 2025–26</h2>
+            <div class="divider"></div>
+            <p style="color:var(--t-md);font-size:.98rem;max-width:540px;line-height:1.75">We are pleased to announce the Office Bearers and Executive Committee Members for Session 58.</p>
+        </div>
+        <div class="bearers-grid fade-up">
+            <div class="bearer-card"><div class="b-av">R</div><div class="b-role">Chairman</div><div class="b-name">Mr. M. Ramakrishnan</div></div>
+            <div class="bearer-card"><div class="b-av">P</div><div class="b-role">Director</div><div class="b-name">Mr. M. Prasath</div></div>
+            <div class="bearer-card"><div class="b-av">S</div><div class="b-role">Treasurer</div><div class="b-name">Mr. N. J. Srinivas</div></div>
+            <div class="bearer-card"><div class="b-av">E</div><div class="b-role">Advisor</div><div class="b-name">Mr. Era Muthu</div></div>
+        </div>
+        <div class="ec-wrap fade-up">
+            <div class="ec-title">Executive Committee</div>
+            <div class="ec-sub">The dedicated members who helm every proceeding of Session 58</div>
+            <div class="ec-grid">
+                <div class="ec-card"><div class="ec-av">J</div><div class="ec-name">Dr. B. Jayaraman</div></div>
+                <div class="ec-card"><div class="ec-av">M</div><div class="ec-name">Mr. J. Muruganathan</div></div>
+                <div class="ec-card"><div class="ec-av">A</div><div class="ec-name">Mr. R. Asokan</div></div>
+                <div class="ec-card"><div class="ec-av">E</div><div class="ec-name">Mr. E. Mohanraj</div></div>
+                <div class="ec-card"><div class="ec-av">R</div><div class="ec-name">Mr. M. V. Ravichandar</div></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- PROGRAMMES -->
+<section id="programmes">
+    <div class="prog-inner">
+        <div class="fade-up">
+            <div class="section-label">What We Do</div>
+            <h2 class="section-title">Our Programmes</h2>
+            <div class="divider" style="background:linear-gradient(to right,var(--gold),transparent)"></div>
+        </div>
+        <div class="prog-grid fade-up">
+            <div class="prog-card"><div class="prog-icon">🎤</div><div class="prog-name">Guest Lecture</div><div class="prog-desc">Distinguished guests and subject experts share insights, experiences, and expertise with members.</div></div>
+            <div class="prog-card"><div class="prog-icon">📢</div><div class="prog-name">Special Lecture</div><div class="prog-desc">Deep-dive sessions on topics of broad intellectual, social, or cultural significance.</div></div>
+            <div class="prog-card"><div class="prog-icon">💬</div><div class="prog-name">Group Discussion</div><div class="prog-desc">Moderated exchanges where members explore ideas, challenge assumptions, and share perspectives.</div></div>
+            <div class="prog-card"><div class="prog-icon">🔭</div><div class="prog-name">Kaleidoscope</div><div class="prog-desc">A multi-perspective format celebrating diversity of thought on a chosen theme.</div></div>
+            <div class="prog-card"><div class="prog-icon">🧠</div><div class="prog-name">Quiz</div><div class="prog-desc">Engaging knowledge contests that test and stretch understanding across all domains.</div></div>
+            <div class="prog-card"><div class="prog-icon">⚖️</div><div class="prog-name">Debate</div><div class="prog-desc">Structured argumentation sharpening critical thinking, rhetoric, and civil discourse.</div></div>
+        </div>
+        <div class="memorial-row fade-up">
+            <div class="memorial-card"><div class="memorial-lbl">Annual Memorial Lecture</div><div class="memorial-name">Narayanasamy Memorial Lecture</div><div class="memorial-note">A prestigious annual lecture in honour of one of ILS's foundational contributors.</div></div>
+            <div class="memorial-card"><div class="memorial-lbl">Annual Memorial Lecture</div><div class="memorial-name">Veeraraghavan Memorial Lecture</div><div class="memorial-note">An annual tribute commemorating Shri Veeraraghavan's legacy of liberal thought.</div></div>
+        </div>
+    </div>
+</section>
+
+<!-- WEEKLY PROCEEDINGS -->
+<section id="proceedings">
+    <div class="proc-header fade-up">
+        <div>
+            <div class="section-label">Every Sunday</div>
+            <h2 class="section-title">Weekly Proceedings</h2>
+        </div>
+        <div class="live-pill">
+            <div class="live-dot"></div>
+            <div class="live-text" id="livePill">Session 58 · Live</div>
+        </div>
+    </div>
+    <div class="proc-current fade-up" id="procCurrent"></div>
+    <div id="procArchive"></div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+    <div class="contact-inner">
+        <div class="fade-up">
+            <div class="section-label">Connect with Us</div>
+            <h2 class="section-title">Join ILS · Get in Touch</h2>
+            <div class="divider"></div>
+        </div>
+        <div class="contact-grid">
+            <div class="c-cards fade-up">
+                <div class="c-card"><div class="c-icon">👤</div><div><div class="c-lbl">Membership Contact</div><div class="c-val">Mr. M. Prasath, Director<br><small style="color:var(--t-lt);font-size:.8rem">Contact to join ILS</small></div></div></div>
+                <div class="c-card"><div class="c-icon">📍</div><div><div class="c-lbl">Meeting Venue</div><div class="c-val">Thulasi Pharmacy,<br>R.S. Puram, Coimbatore</div></div></div>
+                <div class="c-card"><div class="c-icon">📅</div><div><div class="c-lbl">Schedule</div><div class="c-val">Every Sunday · 4:00 PM<br><small style="color:var(--t-lt);font-size:.8rem">48–52 proceedings per Session</small></div></div></div>
+                <div class="c-card"><div class="c-icon">🌐</div><div><div class="c-lbl">Website</div><div class="c-val"><a href="https://ilscoimbatore.in">ilscoimbatore.in</a></div></div></div>
+                <div>
+                    <div class="c-lbl" style="margin-bottom:.7rem">Follow Us</div>
+                    <div class="social-row">
+                        <a href="https://www.facebook.com/ilscoimbatore/" target="_blank" rel="noopener" class="soc-btn fb">
+                            <svg viewBox="0 0 24 24" fill="white"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                            Facebook
+                        </a>
+                        <a href="https://www.instagram.com/ils.coimbatore/" target="_blank" rel="noopener" class="soc-btn ig">
+                            <svg viewBox="0 0 24 24" fill="white"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+                            Instagram
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="join-cta fade-up">
+                <div class="free-tag">Free Membership</div>
+                <h3>Become a Member of ILS</h3>
+                <p>ILS is open to all who have the desire to listen, learn, and lead. No fees, no barriers — just a community of curious minds meeting every Sunday.</p>
+                <div class="cta-bullets">
+                    <div class="cta-bullet"><span>✓</span> Free lifelong membership for all</div>
+                    <div class="cta-bullet"><span>✓</span> Every Sunday, 4 PM, R.S. Puram</div>
+                    <div class="cta-bullet"><span>✓</span> Open to all ages and backgrounds</div>
+                    <div class="cta-bullet"><span>✓</span> Build knowledge and communication</div>
+                    <div class="cta-bullet"><span>✓</span> 50+ years of learning community</div>
+                </div>
+                <a href="mailto:director@ilscoimbatore.in" class="btn-gold-sm">Contact Director to Join →</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <div class="footer-main">
+        <div class="f-logo">ILS · Institute of Liberal Studies<span>Coimbatore, Tamil Nadu · Since 1967</span></div>
+        <div class="f-socials">
+            <a href="https://www.instagram.com/ils.coimbatore/" target="_blank" rel="noopener" class="f-soc" title="Instagram">
+                <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+            </a>
+            <a href="https://www.facebook.com/ilscoimbatore/" target="_blank" rel="noopener" class="f-soc" title="Facebook">
+                <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            </a>
+        </div>
+        <div class="f-session">Now Active: <strong>Session 58</strong></div>
+    </div>
+    <div class="footer-copy">© 2025 Institute of Liberal Studies, Coimbatore. Dedicated to the pursuit of knowledge and free learning.</div>
+</footer>
+
+
+<!-- ═══════════════════════════════════════════════════════════════
+     WEEKLY UPDATE — ONLY EDIT THIS SECTION EACH SUNDAY
+     ───────────────────────────────────────────────────────────────
+     HOW TO ADD A NEW WEEK (takes 30 seconds):
+
+     1. Upload your images into the images/ folder on GitHub
+        - File can be .jpg, .jpeg, or .png — the site handles all formats
+        - Name them whatever you like, just write the exact filename below
+
+     2. Add ONE line at the bottom of the PROCEEDINGS array:
+        { week: 5, invite: 'invite_week_05.png', photo: 'photo_week_05.jpg' },
+
+     3. Save index.html → push to GitHub → done. Site updates automatically.
+
+     SKIPPING A WEEK: Simply don't add an entry. Site will continue normally.
+     The LAST entry in the list is always shown as "This Week".
+═══════════════════════════════════════════════════════════════ -->
+<script>
+const PROCEEDINGS = [
+    // ADD YOUR WEEKS HERE — newest at the bottom
+    // Example entries (remove the // to activate them):
+    // { week: 1, invite: 'invite_week_01.png', photo: 'photo_week_01.png' },
+    // { week: 2, invite: 'invite_week_02.jpg', photo: 'photo_week_02.jpg' },
+    // { week: 3, invite: 'invite_week_03.png', photo: 'photo_week_03.png' },
+    // week 4 skipped — just don't add it
+    // { week: 5, invite: 'invite_week_05.png', photo: 'photo_week_05.jpg' },
+];
+
+(function render() {
+    const wrap = s => String(s).padStart(2,'0');
+    const curr  = document.getElementById('procCurrent');
+    const arch  = document.getElementById('procArchive');
+    const pill  = document.getElementById('livePill');
+
+    if (!PROCEEDINGS.length) {
+        curr.innerHTML = `<div class="proc-empty">
+            <div class="proc-empty-icon">📅</div>
+            <div class="proc-empty-title">First proceeding coming soon</div>
+            <div class="proc-empty-text">Session 58 is now active. Invitations and photographs will appear here<br>after each Sunday meeting. Follow us on Instagram and Facebook for updates.</div>
+        </div>`;
+        return;
+    }
+
+    const latest = PROCEEDINGS[PROCEEDINGS.length - 1];
+    const past   = PROCEEDINGS.slice(0, -1).reverse();
+
+    pill.textContent = `Session 58 · Week ${latest.week} · Live`;
+
+    const panel = (side, dot, label, file, week, sub) => `
+        <div class="proc-panel ${side}">
+            <div class="proc-panel-top">
+                <div class="p-dot ${dot}"></div>
+                <div class="p-lbl">${label}</div>
+            </div>
+            ${file
+                ? `<img src="images/${file}" class="proc-panel-img" alt="Week ${week}">
+                   <div class="proc-panel-overlay"></div>`
+                : `<div class="proc-placeholder">
+                       <div class="proc-ph-icon">${dot==='inv'?'📋':'📸'}</div>
+                       <div class="proc-ph-t1">${dot==='inv'?'Invitation':'Photo'} coming soon</div>
+                       <div class="proc-ph-t2">Upload file to images/ folder</div>
+                   </div>`
+            }
+            <div class="proc-panel-bot">
+                <div class="proc-week">Session 58 · Week ${wrap(week)}</div>
+                <div class="proc-sess">${sub}</div>
+            </div>
+        </div>`;
+
+    curr.innerHTML = `
+        <div class="proc-split">
+            <div class="proc-watermark">W${wrap(latest.week)}</div>
+            ${panel('proc-panel-l','inv','This Week\'s Invitation', latest.invite, latest.week, 'FY 2025–26')}
+            ${panel('proc-panel-r','pho','This Week\'s Photograph', latest.photo,  latest.week, 'Thulasi Pharmacy, R.S. Puram')}
+        </div>`;
+
+    if (past.length) {
+        const items = past.map(p => `
+            <div class="archive-item">
+                <div class="archive-img-wrap">
+                    ${p.photo
+                        ? `<img src="images/${p.photo}" alt="Week ${p.week}">`
+                        : `<div style="width:100%;aspect-ratio:4/3;background:#0d1f3e;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.2);font-size:.8rem;">No photo</div>`
+                    }
+                    <div class="archive-badge">W${wrap(p.week)}</div>
+                </div>
+                <div class="archive-lbl">
+                    <div class="archive-week">Week ${wrap(p.week)}</div>
+                    <div class="archive-type">Session 58</div>
+                </div>
+            </div>`).join('');
+
+        arch.className = 'proc-archive fade-up';
+        arch.innerHTML = `
+            <div class="archive-hdr">
+                <div class="archive-title">Past Proceedings · Session 58</div>
+                <div class="archive-count">${past.length} week${past.length>1?'s':''} archived</div>
+            </div>
+            <div class="archive-grid">${items}</div>`;
+
+        const io2 = new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible')})},{threshold:.08});
+        io2.observe(arch);
+    }
+})();
+</script>
+
+
+<!-- THREE.JS -->
+<script>
+(function(){
+    const canvas=document.getElementById('three-canvas');
+    const renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:false});
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
+    renderer.setSize(window.innerWidth,window.innerHeight);
+    renderer.setClearColor(0x05142B,1);
+    const scene=new THREE.Scene();
+    scene.fog=new THREE.Fog(0x05142B,18,38);
+    const camera=new THREE.PerspectiveCamera(58,window.innerWidth/window.innerHeight,0.1,100);
+    camera.position.set(0,2.2,11);camera.lookAt(0,0,0);
+    scene.add(new THREE.AmbientLight(0x3355aa,0.5));
+    const kL=new THREE.PointLight(0x2563eb,4,22);kL.position.set(6,6,5);scene.add(kL);
+    scene.add(Object.assign(new THREE.PointLight(0x60a5fa,2,16),{position:new THREE.Vector3(-6,3,-3)}));
+    scene.add(Object.assign(new THREE.PointLight(0xd4a040,2,12),{position:new THREE.Vector3(0,-1.5,5)}));
+    const mMic=new THREE.MeshStandardMaterial({color:0x1a4ba0,metalness:.85,roughness:.2});
+    const mHead=new THREE.MeshStandardMaterial({color:0x222222,metalness:.9,roughness:.25});
+    const mGold=new THREE.MeshStandardMaterial({color:0xc9a040,metalness:.95,roughness:.12});
+    const mGlow=new THREE.MeshStandardMaterial({color:0x60a5fa,metalness:.3,roughness:.4,emissive:0x1a4ba0,emissiveIntensity:.6});
+    const mic=new THREE.Group();
+    mic.add(new THREE.Mesh(new THREE.CylinderGeometry(.26,.34,1.9,28),mMic));
+    const mh=new THREE.Mesh(new THREE.SphereGeometry(.52,28,28),mHead);mh.position.y=1.28;mic.add(mh);
+    for(let i=-2;i<=2;i++){const y=1.28+i*.19,r=Math.sqrt(Math.max(0,.52*.52-(i*.19)*(i*.19)))+.025;const t=new THREE.Mesh(new THREE.TorusGeometry(r,.013,8,48),new THREE.MeshStandardMaterial({color:0x333333,metalness:.5,roughness:.5}));t.position.y=y;mic.add(t)}
+    const cn=new THREE.Mesh(new THREE.CylinderGeometry(.13,.13,.5,14),mGold);cn.position.y=-1.2;mic.add(cn);
+    const st=new THREE.Mesh(new THREE.CylinderGeometry(.065,.065,2.1,12),mGold);st.position.y=-2.4;mic.add(st);
+    const bs=new THREE.Mesh(new THREE.CylinderGeometry(1,1,.09,36),mGold);bs.position.y=-3.5;mic.add(bs);
+    mic.position.set(2.8,.7,0);mic.rotation.z=.07;scene.add(mic);
+    const tbl=new THREE.Group();
+    tbl.add(new THREE.Mesh(new THREE.CylinderGeometry(2,2,.14,52),new THREE.MeshStandardMaterial({color:0x1e3a8a,metalness:.3,roughness:.6})));
+    const tr=new THREE.Mesh(new THREE.TorusGeometry(2,.045,8,72),mGold);tr.rotation.x=Math.PI/2;tr.position.y=.08;tbl.add(tr);
+    for(let i=0;i<8;i++){const a=(i/8)*Math.PI*2,rx=Math.cos(a)*3,rz=Math.sin(a)*3;const pb=new THREE.Mesh(new THREE.CylinderGeometry(.2,.24,.9,14),mGlow);pb.position.set(rx,.55,rz);tbl.add(pb);const ph=new THREE.Mesh(new THREE.SphereGeometry(.22,14,14),new THREE.MeshStandardMaterial({color:0x93c5fd,metalness:.25,roughness:.5,emissive:0x2563eb,emissiveIntensity:.4}));ph.position.set(rx,1.18,rz);tbl.add(ph)}
+    tbl.position.set(-4,-1.8,-2.5);scene.add(tbl);
+    const lm=new THREE.LineBasicMaterial({color:0x2563eb,transparent:true,opacity:.12});
+    for(let i=0;i<8;i++){const a=(i/8)*Math.PI*2;scene.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(-4+Math.cos(a)*3,0,-2.5+Math.sin(a)*3),new THREE.Vector3(2.8,.7,0)]),lm))}
+    const N=260,pos=new Float32Array(N*3),col=new Float32Array(N*3);
+    for(let i=0;i<N;i++){pos[i*3]=(Math.random()-.5)*32;pos[i*3+1]=(Math.random()-.5)*22;pos[i*3+2]=(Math.random()-.5)*16;col[i*3]=.2+Math.random()*.6;col[i*3+1]=.5+Math.random()*.5;col[i*3+2]=1}
+    const pg=new THREE.BufferGeometry();pg.setAttribute('position',new THREE.BufferAttribute(pos,3));pg.setAttribute('color',new THREE.BufferAttribute(col,3));
+    scene.add(new THREE.Points(pg,new THREE.PointsMaterial({size:.055,vertexColors:true,transparent:true,opacity:.5})));
+    scene.add(Object.assign(new THREE.GridHelper(60,34,0x0d2550,0x071a3a),{position:{x:0,y:-4.5,z:0}}));
+    let t=0;
+    (function animate(){requestAnimationFrame(animate);t+=.01;mic.position.y=.7+Math.sin(t*.75)*.18;mic.rotation.y=Math.sin(t*.28)*.06;tbl.rotation.y+=.0025;kL.position.x=Math.cos(t*.4)*7;kL.position.z=Math.sin(t*.4)*7;camera.position.x=Math.sin(t*.12)*.35;camera.position.y=2.2+Math.sin(t*.18)*.2;camera.lookAt(0,0,0);renderer.render(scene,camera)})();
+    window.addEventListener('resize',()=>{camera.aspect=window.innerWidth/window.innerHeight;camera.updateProjectionMatrix();renderer.setSize(window.innerWidth,window.innerHeight)});
+})();
+</script>
+
+<!-- NAV + SCROLL -->
+<script>
+window.addEventListener('scroll',()=>document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>60));
+const io=new IntersectionObserver(e=>e.forEach((x,i)=>{if(x.isIntersecting)setTimeout(()=>x.target.classList.add('visible'),i*80)}),{threshold:.08});
+document.querySelectorAll('.fade-up').forEach(el=>io.observe(el));
+function toggleMobile(){document.getElementById('mobileMenu').classList.toggle('open');document.getElementById('hamburger').classList.toggle('open');document.body.style.overflow=document.getElementById('mobileMenu').classList.contains('open')?'hidden':''}
+function closeMobile(){document.getElementById('mobileMenu').classList.remove('open');document.getElementById('hamburger').classList.remove('open');document.body.style.overflow=''}
+</script>
+
+</body>
+</html>
