@@ -380,8 +380,8 @@
         Every Sunday after the meeting, update this section:
         1. Change the week number in .week-badge
         2. Replace the placeholder <div> in each panel with:
-              <img src="images/invite_week_NN.jpg" class="panel-img" alt="Week NN">
-              <img src="images/photo_week_NN.jpg"  class="panel-img" alt="Week NN">
+              <img src="images/invite_week_NN.png" class="panel-img" alt="Week NN">
+              <img src="images/photo_week_NN.png"  class="panel-img" alt="Week NN">
         3. Move last week's content to the Past Proceedings grid below
         4. Push index.html to GitHub — site auto-updates
         ================================================================
@@ -587,6 +587,7 @@
 <!-- ══════════════════════ HERO ══════════════════════ -->
 <section id="hero">
     <canvas id="three-canvas"></canvas>
+    <img src="images/hero-bg.png" id="hero-bg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;opacity:0.35;">
     <div class="hero-overlay"></div>
 
     <div class="hero-content">
@@ -835,10 +836,10 @@
             Example: "Session 58 · Week 5 · Live"
 
     STEP 2: In the LEFT panel, replace the placeholder div with:
-            <img src="images/invite_week_05.jpg" class="panel-img" alt="Week 5 Invitation">
+            <img src="images/invite_week_05.png" class="panel-img" alt="Week 5 Invitation">
 
     STEP 3: In the RIGHT panel, replace the placeholder div with:
-            <img src="images/photo_week_05.jpg" class="panel-img" alt="Week 5 Photo">
+            <img src="images/photo_week_05.png" class="panel-img" alt="Week 5 Photo">
 
     STEP 4: Update .panel-week text in both panels to "Session 58 · Week 05"
 
@@ -868,11 +869,11 @@
             </div>
             <!--
                 STEP 2: Replace this placeholder with the invite image:
-                <img src="images/invite_week_01.jpg" class="panel-img" alt="Week 1 Invitation">
+                <img src="images/invite_week_01.png" class="panel-img" alt="Week 1 Invitation">
             -->
             <div class="panel-placeholder">
                 <div class="ph-icon">📋</div>
-                <div class="ph-text">Week 1 invitation will appear here.<br>Add invite_week_01.jpg to the <em>images/</em> folder.</div>
+                <div class="ph-text">Week 1 invitation will appear here.<br>Add invite_week_01.png to the <em>images/</em> folder.</div>
             </div>
             <div class="panel-bot">
                 <div>
@@ -891,11 +892,11 @@
             </div>
             <!--
                 STEP 3: Replace this placeholder with the event photo:
-                <img src="images/photo_week_01.jpg" class="panel-img" alt="Week 1 Photo">
+                <img src="images/photo_week_01.png" class="panel-img" alt="Week 1 Photo">
             -->
             <div class="panel-placeholder">
                 <div class="ph-icon">📸</div>
-                <div class="ph-text">Week 1 event photo will appear here.<br>Add photo_week_01.jpg to the <em>images/</em> folder.</div>
+                <div class="ph-text">Week 1 event photo will appear here.<br>Add photo_week_01.png to the <em>images/</em> folder.</div>
             </div>
             <div class="panel-bot">
                 <div>
@@ -915,7 +916,7 @@
     Copy and paste this block for each past week:
 
     <div class="past-item">
-        <img src="images/photo_week_01.jpg" alt="Week 1">
+        <img src="images/photo_week_01.png" alt="Week 1">
         <div class="past-lbl">Week 01 · Session 58</div>
     </div>
 
