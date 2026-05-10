@@ -1,0 +1,1196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ILS – Institute of Liberal Studies | Coimbatore</title>
+    <meta name="description" content="Institute of Liberal Studies, Coimbatore – 50+ years of free learning, every Sunday at 4 PM at R.S. Puram. Join Session 58.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,500;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --navy:      #05142B;
+            --royal:     #1B3F8A;
+            --bright:    #2563EB;
+            --sky:       #93C5FD;
+            --white:     #FFFFFF;
+            --cream:     #EEF5FF;
+            --gold:      #C9A040;
+            --gold-lt:   #E8C96A;
+            --text-dk:   #0F172A;
+            --text-md:   #334155;
+            --text-lt:   #64748B;
+            --border:    #D4E4FB;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            color: var(--text-dk);
+            background: var(--white);
+            overflow-x: hidden;
+        }
+
+        /* ─── NAVBAR ─── */
+        nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+            padding: 1.4rem 5rem;
+            display: flex; align-items: center; justify-content: space-between;
+            transition: all .4s ease;
+        }
+        nav.scrolled {
+            background: rgba(5,20,43,.96);
+            backdrop-filter: blur(14px);
+            padding: .9rem 5rem;
+            box-shadow: 0 4px 30px rgba(0,0,0,.3);
+        }
+        .nav-logo { display: flex; align-items: center; gap: .75rem; text-decoration: none; }
+        .logo-mark {
+            width: 46px; height: 46px;
+            background: linear-gradient(135deg, var(--bright), var(--sky));
+            border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 1.3rem;
+            color: white; letter-spacing: -1px;
+        }
+        .logo-text { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 600; color: white; }
+        .logo-text span {
+            display: block; font-family: 'DM Sans', sans-serif; font-size: .62rem;
+            color: var(--sky); letter-spacing: 1.8px; text-transform: uppercase; margin-top: .1rem;
+        }
+        .nav-links { display: flex; gap: 2.2rem; list-style: none; }
+        .nav-links a {
+            text-decoration: none; color: rgba(255,255,255,.75);
+            font-size: .82rem; font-weight: 500; letter-spacing: .5px; text-transform: uppercase;
+            transition: color .25s; position: relative;
+        }
+        .nav-links a::after {
+            content: ''; position: absolute; bottom: -4px; left: 0;
+            width: 0; height: 1px; background: var(--gold); transition: width .3s;
+        }
+        .nav-links a:hover { color: var(--gold-lt); }
+        .nav-links a:hover::after { width: 100%; }
+        .nav-cta {
+            background: var(--gold) !important; color: var(--navy) !important;
+            padding: .45rem 1.2rem; border-radius: 6px; font-weight: 600 !important;
+            transition: background .25s, transform .2s !important;
+        }
+        .nav-cta:hover { background: var(--gold-lt) !important; transform: translateY(-1px); }
+        .nav-cta::after { display: none !important; }
+
+        /* ─── HERO ─── */
+        #hero {
+            position: relative; height: 100vh; min-height: 680px;
+            display: flex; align-items: center; overflow: hidden;
+        }
+        #three-canvas {
+            position: absolute; inset: 0; width: 100%; height: 100%;
+        }
+        .hero-overlay {
+            position: absolute; inset: 0;
+            background: linear-gradient(120deg,
+                rgba(5,20,43,.88) 0%,
+                rgba(27,63,138,.55) 55%,
+                rgba(5,20,43,.75) 100%);
+        }
+        .hero-content {
+            position: relative; z-index: 10;
+            padding: 0 5rem; max-width: 680px;
+        }
+        .hero-badge {
+            display: inline-flex; align-items: center; gap: .5rem;
+            background: rgba(201,160,64,.14); border: 1px solid rgba(201,160,64,.4);
+            color: var(--gold-lt); padding: .38rem 1rem; border-radius: 100px;
+            font-size: .74rem; font-weight: 600; letter-spacing: 1.8px;
+            text-transform: uppercase; margin-bottom: 1.6rem;
+        }
+        .hero-badge::before {
+            content: ''; width: 6px; height: 6px;
+            background: var(--gold); border-radius: 50%;
+            animation: blink 2s ease infinite;
+        }
+        @keyframes blink {
+            0%,100% { opacity: 1; transform: scale(1); }
+            50% { opacity: .4; transform: scale(1.5); }
+        }
+        .hero-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(3rem, 5.5vw, 5rem); font-weight: 700;
+            color: white; line-height: 1.08; margin-bottom: .6rem;
+        }
+        .hero-title .accent { color: var(--sky); }
+        .hero-sub {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1.15rem, 2.2vw, 1.5rem); font-weight: 300;
+            font-style: italic; color: rgba(255,255,255,.65); margin-bottom: 1.4rem;
+        }
+        .hero-copy {
+            font-size: .95rem; color: rgba(255,255,255,.55);
+            line-height: 1.8; max-width: 480px; margin-bottom: 2.4rem;
+        }
+        .hero-stats { display: flex; gap: 2.5rem; margin-bottom: 2.4rem; }
+        .stat { border-left: 2px solid var(--gold); padding-left: 1rem; }
+        .stat-n {
+            font-family: 'Cormorant Garamond', serif; font-size: 2.2rem;
+            font-weight: 700; color: white; line-height: 1;
+        }
+        .stat-l {
+            font-size: .7rem; color: rgba(255,255,255,.45);
+            text-transform: uppercase; letter-spacing: 1.2px; margin-top: .2rem;
+        }
+        .hero-btns { display: flex; gap: 1rem; align-items: center; }
+        .btn-gold {
+            background: var(--gold); color: var(--navy);
+            padding: .9rem 2rem; border-radius: 8px; text-decoration: none;
+            font-weight: 600; font-size: .88rem; letter-spacing: .3px;
+            display: inline-flex; align-items: center; gap: .4rem;
+            transition: all .3s;
+        }
+        .btn-gold:hover {
+            background: var(--gold-lt); transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(201,160,64,.4);
+        }
+        .btn-outline {
+            color: white; padding: .9rem 1.5rem;
+            border: 1px solid rgba(255,255,255,.28); border-radius: 8px;
+            text-decoration: none; font-size: .88rem; font-weight: 500;
+            transition: all .3s;
+        }
+        .btn-outline:hover { background: rgba(255,255,255,.1); border-color: rgba(255,255,255,.55); }
+        .scroll-cue {
+            position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
+            display: flex; flex-direction: column; align-items: center; gap: .5rem;
+            color: rgba(255,255,255,.35); font-size: .65rem; letter-spacing: 2.5px;
+            text-transform: uppercase; z-index: 10;
+        }
+        .scroll-line {
+            width: 1px; height: 48px;
+            background: linear-gradient(to bottom, transparent, rgba(255,255,255,.3));
+            animation: scl 2s ease infinite;
+        }
+        @keyframes scl { 0%,100% { transform: scaleY(1); opacity: .5; } 50% { transform: scaleY(1.4); opacity: 1; } }
+
+        /* ─── SECTION BASE ─── */
+        section { padding: 6rem 5rem; }
+        .section-label {
+            font-size: .72rem; font-weight: 600; letter-spacing: 2.8px;
+            text-transform: uppercase; color: var(--bright); margin-bottom: .65rem;
+        }
+        .section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2rem, 3.8vw, 3rem); font-weight: 700;
+            color: var(--navy); line-height: 1.12;
+        }
+        .divider {
+            width: 56px; height: 3px;
+            background: linear-gradient(to right, var(--gold), transparent);
+            margin: 1.4rem 0 2rem;
+        }
+        .fade-up {
+            opacity: 0; transform: translateY(28px);
+            transition: opacity .7s ease, transform .7s ease;
+        }
+        .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+        /* ─── ABOUT ─── */
+        #about { background: var(--cream); }
+        .about-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 6rem;
+            align-items: center; max-width: 1200px; margin: 0 auto;
+        }
+        .about-body p {
+            font-size: 1.02rem; line-height: 1.88; color: var(--text-md); margin-bottom: 1.2rem;
+        }
+        .about-body strong { color: var(--royal); font-weight: 600; }
+        .info-block {
+            margin-top: 2rem; padding: 1.5rem;
+            background: white; border-radius: 14px;
+            border-left: 4px solid var(--gold);
+            box-shadow: 0 4px 24px rgba(0,0,0,.06);
+            display: flex; flex-direction: column; gap: 1rem;
+        }
+        .info-row { display: flex; align-items: flex-start; gap: 1rem; }
+        .info-icon {
+            width: 38px; height: 38px; border-radius: 9px;
+            background: linear-gradient(135deg, var(--bright), var(--royal));
+            display: flex; align-items: center; justify-content: center;
+            color: white; font-size: .9rem; flex-shrink: 0;
+        }
+        .info-lbl {
+            font-size: .7rem; text-transform: uppercase;
+            letter-spacing: 1.2px; color: var(--text-lt);
+            font-weight: 600; margin-bottom: .2rem;
+        }
+        .info-val { font-size: .92rem; color: var(--text-dk); font-weight: 500; }
+
+        /* About visual card */
+        .theme-card {
+            background: linear-gradient(135deg, var(--navy), var(--royal));
+            border-radius: 20px; padding: 2.5rem;
+            color: white; box-shadow: 0 20px 60px rgba(5,20,43,.25);
+        }
+        .theme-lbl {
+            font-size: .68rem; text-transform: uppercase;
+            letter-spacing: 2.5px; color: var(--sky);
+            font-weight: 600; margin-bottom: .9rem;
+        }
+        .theme-heading {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.4rem; font-weight: 700; line-height: 1.15;
+            margin-bottom: .6rem;
+        }
+        .theme-note {
+            font-size: .85rem; color: rgba(255,255,255,.55);
+            font-style: italic; margin-bottom: 1.5rem; line-height: 1.6;
+        }
+        .tags { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 1.8rem; }
+        .tag {
+            background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.18);
+            padding: .3rem .75rem; border-radius: 100px;
+            font-size: .74rem; color: rgba(255,255,255,.75);
+        }
+        .highlight-row {
+            display: flex; gap: 1.2rem; padding-top: 1.5rem;
+            border-top: 1px solid rgba(255,255,255,.12);
+        }
+        .highlight {
+            flex: 1; text-align: center;
+        }
+        .hl-n {
+            font-family: 'Cormorant Garamond', serif; font-size: 1.9rem;
+            font-weight: 700; color: var(--gold-lt); line-height: 1;
+        }
+        .hl-l { font-size: .65rem; color: rgba(255,255,255,.45); text-transform: uppercase; letter-spacing: 1px; margin-top: .25rem; }
+
+        /* ─── SESSION 58 ─── */
+        #session { background: white; }
+        .session-inner { max-width: 1200px; margin: 0 auto; }
+        .bearers-grid {
+            display: grid; grid-template-columns: repeat(4,1fr);
+            gap: 1.4rem; margin-top: 3rem;
+        }
+        .bearer-card {
+            background: white; border: 1px solid var(--border);
+            border-radius: 18px; padding: 2rem 1.5rem; text-align: center;
+            transition: all .3s; position: relative; overflow: hidden;
+        }
+        .bearer-card::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+            background: linear-gradient(to right, var(--bright), var(--sky));
+        }
+        .bearer-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 14px 40px rgba(27,63,138,.12); border-color: var(--sky);
+        }
+        .b-avatar {
+            width: 62px; height: 62px; border-radius: 50%; margin: 0 auto 1rem;
+            background: linear-gradient(135deg, var(--bright), var(--royal));
+            display: flex; align-items: center; justify-content: center;
+            font-family: 'Cormorant Garamond', serif; font-size: 1.5rem;
+            font-weight: 700; color: white;
+        }
+        .b-role {
+            font-size: .68rem; text-transform: uppercase; letter-spacing: 1.8px;
+            color: var(--bright); font-weight: 600; margin-bottom: .35rem;
+        }
+        .b-name {
+            font-family: 'Cormorant Garamond', serif; font-size: 1.15rem;
+            font-weight: 600; color: var(--navy); line-height: 1.3;
+        }
+        .ec-wrap { margin-top: 3rem; }
+        .ec-title {
+            font-family: 'Cormorant Garamond', serif; font-size: 1.4rem;
+            font-weight: 600; color: var(--navy); margin-bottom: .4rem;
+        }
+        .ec-sub { font-size: .84rem; color: var(--text-lt); margin-bottom: 1.5rem; }
+        .ec-grid {
+            display: grid; grid-template-columns: repeat(5,1fr); gap: 1rem;
+        }
+        .ec-card {
+            background: var(--cream); border: 1px solid var(--border);
+            border-radius: 12px; padding: 1.4rem 1rem; text-align: center;
+            transition: all .3s;
+        }
+        .ec-card:hover {
+            background: white; border-color: var(--bright);
+            box-shadow: 0 4px 20px rgba(37,99,235,.1);
+        }
+        .ec-av {
+            width: 46px; height: 46px; border-radius: 50%; margin: 0 auto .7rem;
+            background: linear-gradient(135deg, #3B82F6, #1E3A8A);
+            display: flex; align-items: center; justify-content: center;
+            font-family: 'Cormorant Garamond', serif; font-size: 1.1rem;
+            font-weight: 700; color: white;
+        }
+        .ec-name { font-size: .84rem; font-weight: 600; color: var(--navy); line-height: 1.35; }
+
+        /* ─── PROGRAMMES ─── */
+        #programmes { background: var(--navy); }
+        #programmes .section-label { color: var(--sky); }
+        #programmes .section-title { color: white; }
+        .prog-inner { max-width: 1200px; margin: 0 auto; }
+        .prog-grid {
+            display: grid; grid-template-columns: repeat(3,1fr);
+            gap: 1.4rem; margin-top: 3rem;
+        }
+        .prog-card {
+            background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.09);
+            border-radius: 18px; padding: 2rem; transition: all .4s; cursor: default;
+        }
+        .prog-card:hover {
+            background: rgba(37,99,235,.2); border-color: rgba(147,197,253,.35);
+            transform: translateY(-5px);
+        }
+        .prog-icon { font-size: 2.2rem; margin-bottom: 1rem; }
+        .prog-name {
+            font-family: 'Cormorant Garamond', serif; font-size: 1.3rem;
+            font-weight: 600; color: white; margin-bottom: .45rem;
+        }
+        .prog-desc { font-size: .84rem; color: rgba(255,255,255,.48); line-height: 1.65; }
+        .memorial-row {
+            display: grid; grid-template-columns: 1fr 1fr;
+            gap: 1.4rem; margin-top: 2rem;
+        }
+        .memorial-card {
+            background: rgba(201,160,64,.09); border: 1px solid rgba(201,160,64,.28);
+            border-radius: 18px; padding: 2rem;
+        }
+        .memorial-lbl {
+            font-size: .68rem; text-transform: uppercase; letter-spacing: 2px;
+            color: var(--gold); font-weight: 600; margin-bottom: .6rem;
+        }
+        .memorial-name {
+            font-family: 'Cormorant Garamond', serif; font-size: 1.35rem;
+            font-weight: 600; color: white; margin-bottom: .4rem;
+        }
+        .memorial-note { font-size: .82rem; color: rgba(255,255,255,.45); line-height: 1.6; }
+
+        /* ─── PROCEEDINGS ─── */
+        #proceedings { background: var(--cream); }
+
+        /*
+        ================================================================
+        WEEKLY UPDATE SECTION — ILS TEAM INSTRUCTIONS
+        ----------------------------------------------------------------
+        Every Sunday after the meeting, update this section:
+        1. Change the week number in .week-badge
+        2. Replace the placeholder <div> in each panel with:
+              <img src="images/invite_week_NN.jpg" class="panel-img" alt="Week NN">
+              <img src="images/photo_week_NN.jpg"  class="panel-img" alt="Week NN">
+        3. Move last week's content to the Past Proceedings grid below
+        4. Push index.html to GitHub — site auto-updates
+        ================================================================
+        */
+
+        .proc-header {
+            display: flex; align-items: flex-end; justify-content: space-between;
+            max-width: 1200px; margin: 0 auto 3rem; flex-wrap: wrap; gap: 1rem;
+        }
+        .week-badge {
+            background: var(--bright); color: white;
+            padding: .45rem 1.1rem; border-radius: 100px;
+            font-size: .78rem; font-weight: 600; letter-spacing: .4px;
+        }
+        .proc-panels {
+            display: grid; grid-template-columns: 1fr 1fr;
+            gap: 2rem; max-width: 1200px; margin: 0 auto;
+        }
+        .panel {
+            background: white; border-radius: 22px; overflow: hidden;
+            box-shadow: 0 8px 40px rgba(0,0,0,.08); transition: all .3s;
+        }
+        .panel:hover { box-shadow: 0 18px 60px rgba(0,0,0,.13); transform: translateY(-4px); }
+        .panel-top {
+            padding: 1.2rem 1.8rem; border-bottom: 1px solid #EEF4FF;
+            display: flex; align-items: center; gap: .75rem;
+        }
+        .p-dot { width: 10px; height: 10px; border-radius: 50%; }
+        .p-dot.inv { background: var(--gold); }
+        .p-dot.pho { background: var(--bright); }
+        .p-lbl {
+            font-size: .76rem; font-weight: 600;
+            text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-md);
+        }
+        .panel-img { width: 100%; aspect-ratio: 4/3; object-fit: cover; display: block; }
+        .panel-placeholder {
+            width: 100%; aspect-ratio: 4/3;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            background: linear-gradient(135deg, #EEF4FF, #DAE8FF);
+            color: #94A3B8; gap: .9rem;
+        }
+        .panel-placeholder .ph-icon { font-size: 3rem; opacity: .45; }
+        .panel-placeholder .ph-text {
+            font-size: .82rem; font-style: italic; text-align: center; padding: 0 2rem; line-height: 1.6;
+        }
+        .panel-bot {
+            padding: 1.2rem 1.8rem; display: flex;
+            align-items: center; justify-content: space-between;
+        }
+        .panel-week {
+            font-family: 'Cormorant Garamond', serif; font-size: 1.1rem;
+            font-weight: 600; color: var(--navy);
+        }
+        .panel-sess { font-size: .68rem; color: var(--text-lt); text-transform: uppercase; letter-spacing: 1px; }
+
+        /* Past proceedings archive */
+        .past-wrap { max-width: 1200px; margin: 3rem auto 0; }
+        .past-heading {
+            font-family: 'Cormorant Garamond', serif; font-size: 1.3rem;
+            font-weight: 600; color: var(--navy);
+            padding-bottom: 1rem; border-bottom: 1px solid var(--border);
+            margin-bottom: 1.5rem;
+        }
+        .past-grid {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 1rem;
+        }
+        .past-item {
+            background: white; border-radius: 12px; overflow: hidden;
+            border: 1px solid #EEF4FF; transition: all .3s;
+        }
+        .past-item:hover { box-shadow: 0 4px 20px rgba(0,0,0,.08); }
+        .past-item img { width: 100%; aspect-ratio: 4/3; object-fit: cover; }
+        .past-lbl {
+            padding: .65rem; font-size: .74rem; font-weight: 600;
+            color: var(--text-md); text-align: center;
+        }
+
+        /* ─── CONTACT ─── */
+        #contact { background: white; }
+        .contact-inner { max-width: 1200px; margin: 0 auto; }
+        .contact-grid {
+            display: grid; grid-template-columns: 1fr 1fr;
+            gap: 5rem; margin-top: 3rem;
+        }
+        .c-cards { display: flex; flex-direction: column; gap: 1.2rem; }
+        .c-card {
+            display: flex; gap: 1.2rem; align-items: flex-start;
+            padding: 1.5rem; background: var(--cream); border-radius: 14px;
+            border: 1px solid var(--border); transition: all .3s;
+        }
+        .c-card:hover {
+            border-color: var(--bright); background: white;
+            box-shadow: 0 4px 20px rgba(37,99,235,.08);
+        }
+        .c-icon {
+            width: 44px; height: 44px; border-radius: 10px;
+            background: linear-gradient(135deg, var(--bright), var(--royal));
+            display: flex; align-items: center; justify-content: center;
+            color: white; font-size: 1.05rem; flex-shrink: 0;
+        }
+        .c-lbl {
+            font-size: .7rem; text-transform: uppercase; letter-spacing: 1.2px;
+            color: var(--text-lt); font-weight: 600; margin-bottom: .2rem;
+        }
+        .c-val { font-size: .95rem; color: var(--text-dk); font-weight: 500; line-height: 1.55; }
+        .c-val a { color: var(--bright); text-decoration: none; }
+        .c-val a:hover { text-decoration: underline; }
+
+        .join-cta {
+            background: linear-gradient(135deg, var(--navy), var(--royal));
+            border-radius: 24px; padding: 3rem; color: white;
+        }
+        .free-tag {
+            display: inline-block; background: var(--gold); color: var(--navy);
+            padding: .28rem .75rem; border-radius: 6px;
+            font-size: .7rem; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 1px; margin-bottom: 1.2rem;
+        }
+        .join-cta h3 {
+            font-family: 'Cormorant Garamond', serif; font-size: 2rem;
+            font-weight: 700; line-height: 1.2; margin-bottom: 1rem;
+        }
+        .join-cta p {
+            font-size: .9rem; color: rgba(255,255,255,.65);
+            line-height: 1.75; margin-bottom: 1.2rem;
+        }
+        .cta-bullets { display: flex; flex-direction: column; gap: .7rem; margin-bottom: 1.8rem; }
+        .cta-bullet {
+            display: flex; align-items: center; gap: .75rem;
+            color: rgba(255,255,255,.75); font-size: .88rem;
+        }
+        .cta-bullet span { color: var(--gold); font-weight: 700; }
+        .btn-gold-sm {
+            background: var(--gold); color: var(--navy); text-decoration: none;
+            padding: .85rem 1.8rem; border-radius: 8px; font-weight: 600;
+            font-size: .88rem; display: inline-block; transition: all .3s;
+        }
+        .btn-gold-sm:hover { background: var(--gold-lt); transform: translateY(-2px); }
+
+        /* ─── FOOTER ─── */
+        footer {
+            background: var(--navy); padding: 2.5rem 5rem;
+            display: flex; align-items: center; justify-content: space-between;
+        }
+        .f-logo {
+            font-family: 'Cormorant Garamond', serif; font-size: 1.2rem;
+            font-weight: 600; color: white;
+        }
+        .f-logo span {
+            display: block; font-family: 'DM Sans', sans-serif;
+            font-size: .62rem; color: var(--sky); letter-spacing: 1.6px;
+            text-transform: uppercase; margin-top: .2rem;
+        }
+        .f-copy { font-size: .76rem; color: rgba(255,255,255,.3); text-align: center; }
+        .f-session {
+            background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1);
+            border-radius: 8px; padding: .45rem .9rem;
+            font-size: .76rem; color: rgba(255,255,255,.45);
+        }
+        .f-session strong { color: var(--gold); }
+
+        /* ─── RESPONSIVE ─── */
+        @media (max-width: 1024px) {
+            .bearers-grid { grid-template-columns: repeat(2,1fr); }
+            .ec-grid { grid-template-columns: repeat(3,1fr); }
+            .prog-grid { grid-template-columns: repeat(2,1fr); }
+            .memorial-row { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 768px) {
+            nav, nav.scrolled { padding: 1rem 1.5rem; }
+            .nav-links { display: none; }
+            section { padding: 4rem 1.5rem; }
+            .hero-content { padding: 0 1.5rem; }
+            .about-grid, .proc-panels, .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
+            .bearers-grid { grid-template-columns: repeat(2,1fr); }
+            .ec-grid { grid-template-columns: repeat(2,1fr); }
+            .prog-grid { grid-template-columns: 1fr; }
+            footer { flex-direction: column; gap: 1.5rem; text-align: center; padding: 2rem 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ══════════════════════ NAVBAR ══════════════════════ -->
+<nav id="navbar">
+    <a href="#" class="nav-logo">
+        <div class="logo-mark">ILS</div>
+        <div class="logo-text">
+            Institute of Liberal Studies
+            <span>Coimbatore · Est. 1967</span>
+        </div>
+    </a>
+    <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#session">Session 58</a></li>
+        <li><a href="#programmes">Programmes</a></li>
+        <li><a href="#proceedings">Proceedings</a></li>
+        <li><a href="#contact" class="nav-cta">Join ILS</a></li>
+    </ul>
+</nav>
+
+<!-- ══════════════════════ HERO ══════════════════════ -->
+<section id="hero">
+    <canvas id="three-canvas"></canvas>
+    <div class="hero-overlay"></div>
+
+    <div class="hero-content">
+        <div class="hero-badge">Session 58 · FY 2025–26 · Now Active</div>
+
+        <h1 class="hero-title">
+            Institute of<br>
+            <span class="accent">Liberal Studies</span>
+        </h1>
+        <p class="hero-sub">An Experiment in Learning</p>
+        <p class="hero-copy">
+            A gathering of curious minds in Coimbatore. Every Sunday, we meet to share knowledge, exchange ideas, and grow together. Membership is free. All are welcome.
+        </p>
+
+        <div class="hero-stats">
+            <div class="stat">
+                <div class="stat-n">58</div>
+                <div class="stat-l">Sessions</div>
+            </div>
+            <div class="stat">
+                <div class="stat-n">50+</div>
+                <div class="stat-l">Years</div>
+            </div>
+            <div class="stat">
+                <div class="stat-n">1000+</div>
+                <div class="stat-l">Lives Shaped</div>
+            </div>
+        </div>
+
+        <div class="hero-btns">
+            <a href="#contact" class="btn-gold">✦ Join ILS Free</a>
+            <a href="#about"   class="btn-outline">Discover More</a>
+        </div>
+    </div>
+
+    <div class="scroll-cue">
+        <div class="scroll-line"></div>
+        Scroll
+    </div>
+</section>
+
+<!-- ══════════════════════ ABOUT ══════════════════════ -->
+<section id="about">
+    <div class="about-grid">
+        <div class="about-body fade-up">
+            <div class="section-label">Who We Are</div>
+            <h2 class="section-title">A Haven for Those Who Seek Knowledge</h2>
+            <div class="divider"></div>
+
+            <p>The <strong>Institute of Liberal Studies (ILS)</strong> is an organisation devoted to learning. With over 50 years of continuous service, ILS has shaped the thoughts and attitudes of more than a thousand people across Coimbatore.</p>
+
+            <p>Every week, ILS presents a two-part programme. The first — our signature <strong>Minute a Member</strong> — gives every member one minute to share anything under the sun. The second part brings in guest lectures, debates, quizzes, group discussions, and more.</p>
+
+            <p>ILS is open to all who have the desire to <strong>listen, learn, and lead</strong>. Membership is free, for life, for all ages and genders.</p>
+
+            <div class="info-block">
+                <div class="info-row">
+                    <div class="info-icon">📅</div>
+                    <div>
+                        <div class="info-lbl">When</div>
+                        <div class="info-val">Every Sunday at 4:00 PM</div>
+                    </div>
+                </div>
+                <div class="info-row">
+                    <div class="info-icon">📍</div>
+                    <div>
+                        <div class="info-lbl">Where</div>
+                        <div class="info-val">Thulasi Pharmacy, R.S. Puram, Coimbatore</div>
+                    </div>
+                </div>
+                <div class="info-row">
+                    <div class="info-icon">⏱</div>
+                    <div>
+                        <div class="info-lbl">Duration</div>
+                        <div class="info-val">Two hours · 48–52 proceedings per Session</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="fade-up">
+            <div class="theme-card">
+                <div class="theme-lbl">Our Core Philosophy</div>
+                <div class="theme-heading">Experiment<br>in Learning</div>
+                <div class="theme-note">Learning through sharing. Growing through listening. Shaping the community through thought.</div>
+                <div class="tags">
+                    <span class="tag">Listen</span>
+                    <span class="tag">Learn</span>
+                    <span class="tag">Lead</span>
+                    <span class="tag">Share</span>
+                    <span class="tag">Grow</span>
+                    <span class="tag">Think</span>
+                </div>
+                <div class="highlight-row">
+                    <div class="highlight">
+                        <div class="hl-n">58</div>
+                        <div class="hl-l">Sessions</div>
+                    </div>
+                    <div class="highlight">
+                        <div class="hl-n">50+</div>
+                        <div class="hl-l">Years</div>
+                    </div>
+                    <div class="highlight">
+                        <div class="hl-n">Free</div>
+                        <div class="hl-l">For Life</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ══════════════════════ SESSION 58 ══════════════════════ -->
+<section id="session">
+    <div class="session-inner">
+        <div class="fade-up">
+            <div class="section-label">Current Year</div>
+            <h2 class="section-title">Session 58 · FY 2025–26</h2>
+            <div class="divider"></div>
+            <p style="color:var(--text-md);font-size:1rem;max-width:560px;line-height:1.75;">
+                We are pleased to announce the Office Bearers and Executive Committee Members for Session 58.
+            </p>
+        </div>
+
+        <!-- Office Bearers -->
+        <div class="bearers-grid fade-up">
+            <div class="bearer-card">
+                <div class="b-avatar">R</div>
+                <div class="b-role">Chairman</div>
+                <div class="b-name">Mr. M. Ramakrishnan</div>
+            </div>
+            <div class="bearer-card">
+                <div class="b-avatar">P</div>
+                <div class="b-role">Director</div>
+                <div class="b-name">Mr. M. Prasath</div>
+            </div>
+            <div class="bearer-card">
+                <div class="b-avatar">S</div>
+                <div class="b-role">Treasurer</div>
+                <div class="b-name">Mr. N. J. Srinivas</div>
+            </div>
+            <div class="bearer-card">
+                <div class="b-avatar">E</div>
+                <div class="b-role">Advisor</div>
+                <div class="b-name">Mr. Era Muthu</div>
+            </div>
+        </div>
+
+        <!-- Executive Committee -->
+        <div class="ec-wrap fade-up">
+            <div class="ec-title">Executive Committee</div>
+            <div class="ec-sub">The dedicated members who helm every proceeding of Session 58</div>
+            <div class="ec-grid">
+                <div class="ec-card">
+                    <div class="ec-av">J</div>
+                    <div class="ec-name">Dr. B. Jayaraman</div>
+                </div>
+                <div class="ec-card">
+                    <div class="ec-av">M</div>
+                    <div class="ec-name">Mr. J. Muruganathan</div>
+                </div>
+                <div class="ec-card">
+                    <div class="ec-av">A</div>
+                    <div class="ec-name">Mr. R. Asokan</div>
+                </div>
+                <div class="ec-card">
+                    <div class="ec-av">E</div>
+                    <div class="ec-name">Mr. E. Mohanraj</div>
+                </div>
+                <div class="ec-card">
+                    <div class="ec-av">R</div>
+                    <div class="ec-name">Mr. M. V. Ravichandar</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ══════════════════════ PROGRAMMES ══════════════════════ -->
+<section id="programmes">
+    <div class="prog-inner">
+        <div class="fade-up">
+            <div class="section-label">What We Do</div>
+            <h2 class="section-title">Our Programmes</h2>
+            <div class="divider" style="background:linear-gradient(to right,var(--gold),transparent);"></div>
+        </div>
+
+        <div class="prog-grid fade-up">
+            <div class="prog-card">
+                <div class="prog-icon">🎤</div>
+                <div class="prog-name">Guest Lecture</div>
+                <div class="prog-desc">Distinguished guests and subject experts share insights, experiences, and expertise with members.</div>
+            </div>
+            <div class="prog-card">
+                <div class="prog-icon">📢</div>
+                <div class="prog-name">Special Lecture</div>
+                <div class="prog-desc">Deep-dive sessions on topics of broad intellectual, social, or cultural significance.</div>
+            </div>
+            <div class="prog-card">
+                <div class="prog-icon">💬</div>
+                <div class="prog-name">Group Discussion</div>
+                <div class="prog-desc">Moderated exchanges where members explore ideas, challenge assumptions, and share perspectives.</div>
+            </div>
+            <div class="prog-card">
+                <div class="prog-icon">🔭</div>
+                <div class="prog-name">Kaleidoscope</div>
+                <div class="prog-desc">A multi-perspective format exploring a theme from many angles — celebrating diversity of thought.</div>
+            </div>
+            <div class="prog-card">
+                <div class="prog-icon">🧠</div>
+                <div class="prog-name">Quiz</div>
+                <div class="prog-desc">Engaging knowledge contests that test and stretch understanding across domains and disciplines.</div>
+            </div>
+            <div class="prog-card">
+                <div class="prog-icon">⚖️</div>
+                <div class="prog-name">Debate</div>
+                <div class="prog-desc">Structured argumentation that sharpens critical thinking, rhetoric, and the art of civil discourse.</div>
+            </div>
+        </div>
+
+        <div class="memorial-row fade-up">
+            <div class="memorial-card">
+                <div class="memorial-lbl">Annual Memorial Lecture</div>
+                <div class="memorial-name">Narayanasamy Memorial Lecture</div>
+                <div class="memorial-note">A prestigious annual lecture in honour of one of ILS's foundational contributors.</div>
+            </div>
+            <div class="memorial-card">
+                <div class="memorial-lbl">Annual Memorial Lecture</div>
+                <div class="memorial-name">Veeraraghavan Memorial Lecture</div>
+                <div class="memorial-note">An annual tribute lecture commemorating Shri Veeraraghavan's legacy of liberal thought.</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ══════════════════════ WEEKLY PROCEEDINGS ══════════════════════ -->
+<section id="proceedings">
+
+    <!--
+    ================================================================
+    ILS TEAM — WEEKLY UPDATE INSTRUCTIONS
+    ----------------------------------------------------------------
+    Every Sunday evening after the meeting:
+
+    STEP 1: Update the week badge text below:
+            Example: "Session 58 · Week 5 · Live"
+
+    STEP 2: In the LEFT panel, replace the placeholder div with:
+            <img src="images/invite_week_05.jpg" class="panel-img" alt="Week 5 Invitation">
+
+    STEP 3: In the RIGHT panel, replace the placeholder div with:
+            <img src="images/photo_week_05.jpg" class="panel-img" alt="Week 5 Photo">
+
+    STEP 4: Update .panel-week text in both panels to "Session 58 · Week 05"
+
+    STEP 5: Scroll to the "PAST PROCEEDINGS" section and add the
+            previous week as a past-item entry.
+
+    STEP 6: Save index.html and push to GitHub. Done.
+    ================================================================
+    -->
+
+    <div class="proc-header fade-up">
+        <div>
+            <div class="section-label">Every Sunday</div>
+            <h2 class="section-title">Weekly Proceedings</h2>
+        </div>
+        <!-- STEP 1: Update week number here each Sunday -->
+        <div class="week-badge">Session 58 · Week 1 · Live</div>
+    </div>
+
+    <div class="proc-panels fade-up">
+
+        <!-- LEFT PANEL: Weekly Invitation / Programme Card -->
+        <div class="panel">
+            <div class="panel-top">
+                <div class="p-dot inv"></div>
+                <div class="p-lbl">This Week's Invitation</div>
+            </div>
+            <!--
+                STEP 2: Replace this placeholder with the invite image:
+                <img src="images/invite_week_01.jpg" class="panel-img" alt="Week 1 Invitation">
+            -->
+            <div class="panel-placeholder">
+                <div class="ph-icon">📋</div>
+                <div class="ph-text">Week 1 invitation will appear here.<br>Add invite_week_01.jpg to the <em>images/</em> folder.</div>
+            </div>
+            <div class="panel-bot">
+                <div>
+                    <!-- STEP 4: Update this each week -->
+                    <div class="panel-week">Session 58 · Week 01</div>
+                    <div class="panel-sess">FY 2025–26</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- RIGHT PANEL: Weekly Event Photo -->
+        <div class="panel">
+            <div class="panel-top">
+                <div class="p-dot pho"></div>
+                <div class="p-lbl">This Week's Photograph</div>
+            </div>
+            <!--
+                STEP 3: Replace this placeholder with the event photo:
+                <img src="images/photo_week_01.jpg" class="panel-img" alt="Week 1 Photo">
+            -->
+            <div class="panel-placeholder">
+                <div class="ph-icon">📸</div>
+                <div class="ph-text">Week 1 event photo will appear here.<br>Add photo_week_01.jpg to the <em>images/</em> folder.</div>
+            </div>
+            <div class="panel-bot">
+                <div>
+                    <div class="panel-week">Session 58 · Week 01</div>
+                    <div class="panel-sess">Thulasi Pharmacy, R.S. Puram</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!--
+    ================================================================
+    PAST PROCEEDINGS ARCHIVE
+    ----------------------------------------------------------------
+    STEP 5: After each new week goes live, add the previous week here.
+    Copy and paste this block for each past week:
+
+    <div class="past-item">
+        <img src="images/photo_week_01.jpg" alt="Week 1">
+        <div class="past-lbl">Week 01 · Session 58</div>
+    </div>
+
+    (The section is currently hidden. Remove the HTML comment tags
+    once you have at least one past week to show.)
+    ================================================================
+
+    <div class="past-wrap fade-up">
+        <div class="past-heading">Past Proceedings · Session 58</div>
+        <div class="past-grid">
+            ADD PAST WEEK ITEMS HERE
+        </div>
+    </div>
+
+    -->
+
+</section>
+
+<!-- ══════════════════════ CONTACT / JOIN ══════════════════════ -->
+<section id="contact">
+    <div class="contact-inner">
+        <div class="fade-up">
+            <div class="section-label">Connect with Us</div>
+            <h2 class="section-title">Join ILS · Get in Touch</h2>
+            <div class="divider"></div>
+        </div>
+
+        <div class="contact-grid">
+            <div class="c-cards fade-up">
+                <div class="c-card">
+                    <div class="c-icon">👤</div>
+                    <div>
+                        <div class="c-lbl">Membership Contact</div>
+                        <div class="c-val">Mr. M. Prasath, Director<br>
+                            <small style="color:var(--text-lt);font-size:.82rem;">Contact to join ILS</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="c-card">
+                    <div class="c-icon">📍</div>
+                    <div>
+                        <div class="c-lbl">Meeting Venue</div>
+                        <div class="c-val">Thulasi Pharmacy,<br>R.S. Puram, Coimbatore</div>
+                    </div>
+                </div>
+                <div class="c-card">
+                    <div class="c-icon">📅</div>
+                    <div>
+                        <div class="c-lbl">Schedule</div>
+                        <div class="c-val">Every Sunday · 4:00 PM<br>
+                            <small style="color:var(--text-lt);font-size:.82rem;">48–52 proceedings per Session</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="c-card">
+                    <div class="c-icon">🌐</div>
+                    <div>
+                        <div class="c-lbl">Website</div>
+                        <div class="c-val"><a href="https://ilscoimbatore.in">ilscoimbatore.in</a></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="join-cta fade-up">
+                <div class="free-tag">Free Membership</div>
+                <h3>Become a Member of ILS</h3>
+                <p>ILS is open to all who have the desire to listen, learn, and lead. No fees, no barriers — just a community of curious minds meeting every Sunday.</p>
+                <div class="cta-bullets">
+                    <div class="cta-bullet"><span>✓</span> Free lifelong membership for all</div>
+                    <div class="cta-bullet"><span>✓</span> Every Sunday, 4 PM, R.S. Puram</div>
+                    <div class="cta-bullet"><span>✓</span> Open to all ages and backgrounds</div>
+                    <div class="cta-bullet"><span>✓</span> Build knowledge and communication</div>
+                    <div class="cta-bullet"><span>✓</span> 50+ years of learning community</div>
+                </div>
+                <a href="mailto:director@ilscoimbatore.in" class="btn-gold-sm">Contact Director to Join →</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ══════════════════════ FOOTER ══════════════════════ -->
+<footer>
+    <div class="f-logo">
+        ILS · Institute of Liberal Studies
+        <span>Coimbatore, Tamil Nadu · Since 1967</span>
+    </div>
+    <div class="f-copy">
+        © 2025 Institute of Liberal Studies, Coimbatore.<br>
+        Dedicated to the pursuit of knowledge and free learning.
+    </div>
+    <div class="f-session">Now Active: <strong>Session 58</strong></div>
+</footer>
+
+
+<!-- ══════════════════════ THREE.JS 3D HERO ══════════════════════ -->
+<script>
+(function () {
+    const canvas   = document.getElementById('three-canvas');
+    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: false });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setClearColor(0x05142B, 1);
+    renderer.shadowMap.enabled = true;
+
+    const scene  = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(58, window.innerWidth / window.innerHeight, 0.1, 100);
+    camera.position.set(0, 2.2, 11);
+    camera.lookAt(0, 0, 0);
+
+    // Fog
+    scene.fog = new THREE.Fog(0x05142B, 18, 40);
+
+    // ── Lights ──────────────────────────────────
+    scene.add(new THREE.AmbientLight(0x3355aa, 0.5));
+
+    const keyL = new THREE.PointLight(0x2563eb, 4, 22);
+    keyL.position.set(6, 6, 5); scene.add(keyL);
+
+    const rimL = new THREE.PointLight(0x60a5fa, 2, 16);
+    rimL.position.set(-6, 3, -3); scene.add(rimL);
+
+    const goldL = new THREE.PointLight(0xd4a040, 2, 12);
+    goldL.position.set(0, -1.5, 5); scene.add(goldL);
+
+    // ── Materials ───────────────────────────────
+    const matMic  = new THREE.MeshStandardMaterial({ color: 0x1a4ba0, metalness: .85, roughness: .2 });
+    const matHead = new THREE.MeshStandardMaterial({ color: 0x222222, metalness: .9,  roughness: .25 });
+    const matGold = new THREE.MeshStandardMaterial({ color: 0xc9a040, metalness: .95, roughness: .12 });
+    const matGlow = new THREE.MeshStandardMaterial({ color: 0x60a5fa, metalness: .3,  roughness: .4, emissive: 0x1a4ba0, emissiveIntensity: .6 });
+
+    // ── Microphone ──────────────────────────────
+    const micGroup = new THREE.Group();
+
+    const bodyG = new THREE.CylinderGeometry(.26, .34, 1.9, 28);
+    micGroup.add(Object.assign(new THREE.Mesh(bodyG, matMic), { position: new THREE.Vector3(0,0,0) }));
+
+    const headG = new THREE.SphereGeometry(.52, 28, 28);
+    const micHead = new THREE.Mesh(headG, matHead);
+    micHead.position.y = 1.28; micGroup.add(micHead);
+
+    // grille rings
+    for (let i = -2; i <= 2; i++) {
+        const y = 1.28 + i * .19;
+        const r = Math.sqrt(Math.max(0, .52 * .52 - (i * .19) * (i * .19))) + .025;
+        const tG = new THREE.TorusGeometry(r, .013, 8, 48);
+        const tor = new THREE.Mesh(tG, new THREE.MeshStandardMaterial({ color: 0x333333, metalness: .5, roughness: .5 }));
+        tor.position.y = y; micGroup.add(tor);
+    }
+
+    const connG  = new THREE.CylinderGeometry(.13, .13, .5, 14);
+    const conn   = new THREE.Mesh(connG, matGold); conn.position.y = -1.2; micGroup.add(conn);
+
+    const standG = new THREE.CylinderGeometry(.065, .065, 2.1, 12);
+    const stand  = new THREE.Mesh(standG, matGold); stand.position.y = -2.4; micGroup.add(stand);
+
+    const baseG  = new THREE.CylinderGeometry(1, 1, .09, 36);
+    const base   = new THREE.Mesh(baseG, matGold); base.position.y = -3.5; micGroup.add(base);
+
+    micGroup.position.set(2.8, .7, 0);
+    micGroup.rotation.z = .07;
+    scene.add(micGroup);
+
+    // ── Round Table ──────────────────────────────
+    const tableGroup = new THREE.Group();
+
+    const tableG = new THREE.CylinderGeometry(2, 2, .14, 52);
+    const tableMat = new THREE.MeshStandardMaterial({ color: 0x1e3a8a, metalness: .3, roughness: .6 });
+    tableGroup.add(new THREE.Mesh(tableG, tableMat));
+
+    const ringG = new THREE.TorusGeometry(2, .045, 8, 72);
+    const ringM = new THREE.Mesh(ringG, matGold);
+    ringM.rotation.x = Math.PI / 2; ringM.position.y = .08; tableGroup.add(ringM);
+
+    // inner ring accent
+    const ring2G = new THREE.TorusGeometry(1.2, .022, 8, 60);
+    const ring2M = new THREE.Mesh(ring2G, new THREE.MeshStandardMaterial({ color: 0x3b82f6, metalness: .5, roughness: .4, emissive: 0x1a3a8a, emissiveIntensity: .5 }));
+    ring2M.rotation.x = Math.PI / 2; ring2M.position.y = .08; tableGroup.add(ring2M);
+
+    // Participants
+    const NUM = 8;
+    for (let i = 0; i < NUM; i++) {
+        const a = (i / NUM) * Math.PI * 2;
+        const r = 3.0, x = Math.cos(a) * r, z = Math.sin(a) * r;
+
+        const bodyPG = new THREE.CylinderGeometry(.2, .24, .9, 14);
+        const pb = new THREE.Mesh(bodyPG, matGlow);
+        pb.position.set(x, .55, z); tableGroup.add(pb);
+
+        const headPG = new THREE.SphereGeometry(.22, 14, 14);
+        const ph = new THREE.Mesh(headPG, new THREE.MeshStandardMaterial({ color: 0x93c5fd, metalness: .25, roughness: .5, emissive: 0x2563eb, emissiveIntensity: .4 }));
+        ph.position.set(x, 1.18, z); tableGroup.add(ph);
+    }
+
+    tableGroup.position.set(-4, -1.8, -2.5);
+    scene.add(tableGroup);
+
+    // ── Connection lines ─────────────────────────
+    const lineMat = new THREE.LineBasicMaterial({ color: 0x2563eb, transparent: true, opacity: .14 });
+    for (let i = 0; i < NUM; i++) {
+        const a = (i / NUM) * Math.PI * 2;
+        const sx = -4 + Math.cos(a) * 3, sz = -2.5 + Math.sin(a) * 3;
+        const pts = [ new THREE.Vector3(sx, 0, sz), new THREE.Vector3(2.8, .7, 0) ];
+        scene.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts), lineMat));
+    }
+
+    // ── Floating particles ───────────────────────
+    const N = 250;
+    const pos = new Float32Array(N * 3);
+    const col = new Float32Array(N * 3);
+    for (let i = 0; i < N; i++) {
+        pos[i*3]   = (Math.random()-.5) * 32;
+        pos[i*3+1] = (Math.random()-.5) * 22;
+        pos[i*3+2] = (Math.random()-.5) * 16;
+        col[i*3]   = .2 + Math.random() * .6;
+        col[i*3+1] = .5 + Math.random() * .5;
+        col[i*3+2] = 1;
+    }
+    const pGeo = new THREE.BufferGeometry();
+    pGeo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+    pGeo.setAttribute('color', new THREE.BufferAttribute(col, 3));
+    const pMat = new THREE.PointsMaterial({ size: .055, vertexColors: true, transparent: true, opacity: .55 });
+    scene.add(new THREE.Points(pGeo, pMat));
+
+    // ── Background grid ──────────────────────────
+    const grid = new THREE.GridHelper(60, 34, 0x0d2550, 0x071a3a);
+    grid.position.y = -4.5; scene.add(grid);
+
+    // ── Animate ──────────────────────────────────
+    let t = 0;
+    function animate() {
+        requestAnimationFrame(animate);
+        t += .01;
+
+        micGroup.position.y = .7 + Math.sin(t * .75) * .18;
+        micGroup.rotation.y = Math.sin(t * .28) * .06;
+
+        tableGroup.rotation.y += .0025;
+
+        keyL.position.x = Math.cos(t * .4) * 7;
+        keyL.position.z = Math.sin(t * .4) * 7;
+
+        camera.position.x = Math.sin(t * .12) * .35;
+        camera.position.y = 2.2 + Math.sin(t * .18) * .2;
+        camera.lookAt(0, 0, 0);
+
+        renderer.render(scene, camera);
+    }
+    animate();
+
+    window.addEventListener('resize', () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+})();
+</script>
+
+<!-- ══════════════════════ SCROLL & NAV JS ══════════════════════ -->
+<script>
+// Sticky nav
+window.addEventListener('scroll', () => {
+    document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 60);
+});
+
+// Scroll reveal
+const io = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+        if (e.isIntersecting) {
+            setTimeout(() => e.target.classList.add('visible'), i * 80);
+        }
+    });
+}, { threshold: .08 });
+
+document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
