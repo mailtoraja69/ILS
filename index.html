@@ -6,355 +6,254 @@
 <title>ILS – Institute of Liberal Studies | Coimbatore</title>
 <meta name="description" content="Institute of Liberal Studies – 50+ years of free learning every Sunday at R.S. Puram, Coimbatore.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garant:ital,wght@0,400;0,600;0,700;0,800;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{
-  --navy:#0B2559;
-  --royal:#1B3F8A;
-  --bright:#2563EB;
-  --mid:#3B82F6;
-  --pale:#DBEAFE;
-  --gold:#C9A84C;
-  --gold-lt:#F5E6C0;
-  --gold-glow:rgba(201,168,76,.18);
-  --white:#FFFFFF;
-  --off:#F4F8FF;
-  --t-dk:#0D1B3E;
-  --t-md:#374151;
-  --t-lt:#6B7280;
-  --bdr:#E0EAFF;
-  --glass:rgba(255,255,255,0.72);
-  --glass-bdr:rgba(255,255,255,0.55);
+  --navy:#0B2559;--royal:#1B3F8A;--bright:#2563EB;--mid:#3B82F6;
+  --pale:#DBEAFE;--gold:#C9A84C;--gold-lt:#F5E6C0;--gold-glow:rgba(201,168,76,.18);
+  --off:#F4F8FF;--t-dk:#0D1B3E;--t-md:#374151;--t-lt:#6B7280;
+  --bdr:#E0EAFF;--glass:rgba(255,255,255,0.72);--glass-bdr:rgba(255,255,255,0.55);
 }
 html{scroll-behavior:smooth}
 body{font-family:'Outfit',sans-serif;color:var(--t-dk);background:#fff;overflow-x:hidden}
 
-/* ───── NAVBAR ───── */
-/* Compact 62px corporate bar with blue top accent */
+/* ── NAVBAR ── */
 nav{
   position:fixed;top:0;left:0;right:0;z-index:1000;
-  background:rgba(255,255,255,0.98);
-  backdrop-filter:blur(20px);
-  border-bottom:1px solid var(--bdr);
-  border-top:3px solid var(--bright);
-  padding:0 4rem;
-  height:62px;
+  background:rgba(255,255,255,0.98);backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--bdr);border-top:3px solid var(--bright);
+  padding:0 4rem;height:68px;
   display:flex;align-items:center;justify-content:space-between;
   transition:box-shadow .3s;
 }
 nav.scrolled{box-shadow:0 2px 18px rgba(11,37,89,.09)}
 .nav-left{display:flex;align-items:center;gap:.75rem;text-decoration:none;flex-shrink:0}
 .logo-wrap{
-  background:#fff;border:1px solid var(--bdr);
-  border-radius:8px;padding:6px 10px;
-  display:flex;align-items:center;justify-content:center;
-  height:62px;
-  box-shadow:0 1px 4px rgba(37,99,235,.08);
-  flex-shrink:0;
+  background:#fff;border:1px solid var(--bdr);border-radius:8px;padding:6px 10px;
+  display:flex;align-items:center;justify-content:center;height:56px;
+  box-shadow:0 1px 4px rgba(37,99,235,.08);flex-shrink:0;
 }
-.logo-wrap img{height:48px;width:auto;display:block}
-.logo-fallback{
-  width:32px;height:32px;background:linear-gradient(135deg,var(--bright),var(--navy));
-  border-radius:6px;display:flex;align-items:center;justify-content:center;
-  font-family:'Playfair Display',serif;font-weight:700;font-size:.95rem;color:#fff;
-}
+.logo-wrap img{height:44px;width:auto;display:block}
+.logo-fallback{width:36px;height:36px;background:linear-gradient(135deg,var(--bright),var(--navy));border-radius:6px;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garant',serif;font-weight:700;font-size:1rem;color:#fff}
 .nav-wordmark{line-height:1.22}
-.nav-wordmark strong{display:block;font-family:'Playfair Display',serif;font-size:.9rem;font-weight:700;color:var(--navy);letter-spacing:.1px}
+.nav-wordmark strong{display:block;font-family:'Cormorant Garant',serif;font-size:1rem;font-weight:700;color:var(--navy);letter-spacing:.2px}
 .nav-wordmark span{font-size:.56rem;color:var(--t-lt);letter-spacing:2px;text-transform:uppercase}
 .nav-right{display:flex;align-items:center;gap:2rem}
 .nav-links{display:flex;gap:2rem;list-style:none}
-.nav-links a{
-  text-decoration:none;color:var(--t-md);font-size:.72rem;
-  font-weight:600;letter-spacing:.9px;text-transform:uppercase;
-  transition:color .2s;position:relative;white-space:nowrap;
-}
+.nav-links a{text-decoration:none;color:var(--t-md);font-size:.72rem;font-weight:600;letter-spacing:.9px;text-transform:uppercase;transition:color .2s;position:relative;white-space:nowrap}
 .nav-links a::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:2px;background:var(--bright);border-radius:2px;transition:width .28s}
 .nav-links a:hover{color:var(--bright)}
 .nav-links a:hover::after{width:100%}
-.nav-cta{
-  background:var(--bright);color:#fff;padding:.4rem 1.05rem;
-  border-radius:6px;font-weight:600;font-size:.72rem;
-  text-decoration:none;transition:all .22s;white-space:nowrap;letter-spacing:.3px;
-}
+.nav-cta{background:var(--bright);color:#fff;padding:.42rem 1.1rem;border-radius:6px;font-weight:600;font-size:.72rem;text-decoration:none;transition:all .22s;white-space:nowrap;letter-spacing:.3px}
 .nav-cta:hover{background:var(--navy);transform:translateY(-1px);box-shadow:0 4px 12px rgba(37,99,235,.28)}
 .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
 .hamburger span{width:22px;height:2px;background:var(--navy);border-radius:2px;transition:all .3s;display:block}
 .hamburger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
 .hamburger.open span:nth-child(2){opacity:0}
 .hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
-
-/* MOBILE MENU */
 .mobile-menu{display:none;position:fixed;inset:0;background:rgba(11,37,89,.98);z-index:999;flex-direction:column;align-items:center;justify-content:center;gap:2rem}
 .mobile-menu.open{display:flex}
-.mobile-menu a{font-family:'Playfair Display',serif;font-size:1.9rem;font-weight:700;color:#fff;text-decoration:none}
+.mobile-menu a{font-family:'Cormorant Garant',serif;font-size:2rem;font-weight:700;color:#fff;text-decoration:none}
 .mobile-menu a:hover{color:var(--pale)}
 .m-cta{background:var(--bright)!important;color:#fff!important;font-family:'Outfit',sans-serif!important;font-size:1rem!important;font-weight:600!important;padding:.65rem 1.8rem;border-radius:7px}
 .m-close{position:absolute;top:1.5rem;right:1.5rem;background:none;border:none;cursor:pointer;color:#fff;font-size:1.5rem}
 
-/* ───── HERO ───── */
-#hero{
-  min-height:100vh;
-  display:grid;grid-template-columns:1fr 1fr;
-  padding-top:62px;overflow:hidden;
-}
-.hero-left{
-  display:flex;align-items:center;
-  padding:4.5rem 4rem 4.5rem 5rem;
-  background:#fff;position:relative;
-}
-.hero-left::before{
-  content:'';position:absolute;top:15%;left:0;
-  width:420px;height:420px;
-  background:radial-gradient(circle,rgba(37,99,235,.06) 0%,transparent 70%);
-  pointer-events:none;
-}
+/* ── HERO ── */
+#hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;padding-top:68px;overflow:hidden}
+.hero-left{display:flex;align-items:center;padding:4.5rem 4rem 4.5rem 5rem;background:#fff;position:relative}
+.hero-left::before{content:'';position:absolute;top:15%;left:0;width:420px;height:420px;background:radial-gradient(circle,rgba(37,99,235,.06) 0%,transparent 70%);pointer-events:none}
 .hero-content{position:relative;z-index:1;max-width:520px}
-.hero-badge{
-  display:inline-flex;align-items:center;gap:.5rem;
-  background:var(--pale);border:1px solid #BFDBFE;
-  color:var(--royal);padding:.33rem .85rem;border-radius:100px;
-  font-size:.65rem;font-weight:600;letter-spacing:1.6px;
-  text-transform:uppercase;margin-bottom:1.5rem;
-}
+.hero-badge{display:inline-flex;align-items:center;gap:.5rem;background:var(--pale);border:1px solid #BFDBFE;color:var(--royal);padding:.33rem .85rem;border-radius:100px;font-size:.65rem;font-weight:600;letter-spacing:1.6px;text-transform:uppercase;margin-bottom:1.5rem}
 .hero-badge::before{content:'';width:6px;height:6px;background:#22c55e;border-radius:50%;animation:blink 2s ease infinite;flex-shrink:0}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
-.hero-title{
-  font-family:'Playfair Display',serif;
-  font-size:clamp(2.8rem,4.6vw,4.4rem);
-  font-weight:800;color:var(--navy);line-height:1.05;margin-bottom:.55rem;
-}
+.hero-title{font-family:'Cormorant Garant',serif;font-size:clamp(3rem,4.8vw,4.6rem);font-weight:800;color:var(--navy);line-height:1.04;margin-bottom:.55rem;letter-spacing:-.5px}
 .hero-title .ac{color:var(--bright)}
-.hero-sub{
-  font-family:'Playfair Display',serif;
-  font-size:clamp(1rem,1.6vw,1.2rem);font-weight:400;font-style:italic;
-  color:var(--t-lt);margin-bottom:1.3rem;
-}
+.hero-sub{font-family:'Cormorant Garant',serif;font-size:clamp(1.1rem,1.6vw,1.3rem);font-weight:400;font-style:italic;color:var(--t-lt);margin-bottom:1.3rem}
 .hero-copy{font-size:.92rem;color:var(--t-md);line-height:1.88;max-width:440px;margin-bottom:2rem}
-
-/* Stat strip — unified card, different from icon-grid style */
-.hero-stats{
-  display:flex;border:1px solid var(--bdr);border-radius:10px;
-  overflow:hidden;margin-bottom:2.2rem;background:#fff;
-  box-shadow:0 2px 12px rgba(37,99,235,.05);
-}
+.hero-stats{display:flex;border:1px solid var(--bdr);border-radius:10px;overflow:hidden;margin-bottom:2.2rem;background:#fff;box-shadow:0 2px 12px rgba(37,99,235,.05)}
 .stat{padding:1rem 1.6rem;flex:1;text-align:center}
 .stat+.stat{border-left:1px solid var(--bdr)}
-.stat-n{font-family:'Playfair Display',serif;font-size:1.85rem;font-weight:800;color:var(--navy);line-height:1}
-.stat-l{font-size:.58rem;color:var(--t-lt);text-transform:uppercase;letter-spacing:1.6px;margin-top:.25rem}
+.stat-n{font-family:'Cormorant Garant',serif;font-size:2.2rem;font-weight:800;color:var(--navy);line-height:1;letter-spacing:-1px}
+.stat-l{font-size:.56rem;color:var(--t-lt);text-transform:uppercase;letter-spacing:1.8px;margin-top:.28rem}
 .hero-btns{display:flex;gap:.9rem;align-items:center;flex-wrap:wrap}
 .btn-primary{background:var(--bright);color:#fff;padding:.82rem 1.75rem;border-radius:8px;text-decoration:none;font-weight:600;font-size:.87rem;transition:all .28s;display:inline-flex;align-items:center;gap:.4rem}
 .btn-primary:hover{background:var(--navy);transform:translateY(-2px);box-shadow:0 8px 22px rgba(37,99,235,.28)}
 .btn-secondary{color:var(--navy);padding:.82rem 1.35rem;border:1.5px solid var(--bdr);border-radius:8px;text-decoration:none;font-size:.87rem;font-weight:500;transition:all .28s;background:#fff}
 .btn-secondary:hover{border-color:var(--bright);color:var(--bright);background:var(--pale)}
-
-/* Hero right */
 .hero-right{position:relative;overflow:hidden;min-height:400px}
 .hero-right-img{width:100%;height:100%;object-fit:cover;display:block}
-.hero-blend{
-  position:absolute;inset:0;
-  background:linear-gradient(to right,rgba(255,255,255,1) 0%,rgba(255,255,255,.22) 16%,transparent 32%);
-  z-index:1;
-}
-.hero-right-placeholder{
-  width:100%;height:100%;min-height:100vh;
-  background:linear-gradient(135deg,var(--pale) 0%,#C7D9F9 100%);
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  gap:1rem;color:var(--royal);
-}
+.hero-blend{position:absolute;inset:0;background:linear-gradient(to right,rgba(255,255,255,1) 0%,rgba(255,255,255,.22) 16%,transparent 32%);z-index:1}
+.hero-right-placeholder{width:100%;height:100%;min-height:100vh;background:linear-gradient(135deg,var(--pale) 0%,#C7D9F9 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem;color:var(--royal)}
 
-/* ───── STATS BAND ─────
-   Large serif numbers on navy — completely different from rathnavelpon icon-card grid */
-.stats-band{
-  background:var(--navy);
-  padding:2.2rem 5rem;
-  display:flex;align-items:center;justify-content:center;
-}
+/* ── STATS BAND ── */
+.stats-band{background:var(--navy);padding:2.2rem 5rem;display:flex;align-items:center;justify-content:center}
 .sb-item{flex:1;text-align:center;position:relative;max-width:280px}
-.sb-item+.sb-item::before{
-  content:'';position:absolute;left:0;top:50%;transform:translateY(-50%);
-  height:36px;width:1px;background:rgba(255,255,255,.1);
-}
-.sb-num{
-  font-family:'Playfair Display',serif;
-  font-size:2.5rem;font-weight:800;color:#fff;line-height:1;
-}
-.sb-lbl{font-size:.6rem;color:rgba(255,255,255,.38);text-transform:uppercase;letter-spacing:2.2px;margin-top:.4rem}
+.sb-item+.sb-item::before{content:'';position:absolute;left:0;top:50%;transform:translateY(-50%);height:36px;width:1px;background:rgba(255,255,255,.1)}
+.sb-num{font-family:'Cormorant Garant',serif;font-size:2.7rem;font-weight:800;color:#fff;line-height:1;letter-spacing:-1px}
+.sb-lbl{font-size:.58rem;color:rgba(255,255,255,.38);text-transform:uppercase;letter-spacing:2.4px;margin-top:.4rem}
 
-/* ───── SECTION BASE ───── */
-section{padding:6rem 4rem}
+/* ── SECTIONS ── */
+section{padding:5rem 4rem}
 .inner{max-width:1200px;margin:0 auto}
 .s-label{font-size:.66rem;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--bright);margin-bottom:.45rem}
-.s-title{font-family:'Playfair Display',serif;font-size:clamp(1.9rem,3.5vw,2.75rem);font-weight:700;color:var(--navy);line-height:1.1}
+.s-title{font-family:'Cormorant Garant',serif;font-size:clamp(2rem,3.5vw,2.9rem);font-weight:700;color:var(--navy);line-height:1.1;letter-spacing:-.3px}
 .s-divider{width:38px;height:2px;background:var(--bright);border-radius:2px;margin:1rem 0 1.6rem;opacity:.55}
 .fade-up{opacity:0;transform:translateY(20px);transition:opacity .55s ease,transform .55s ease}
 .fade-up.visible{opacity:1;transform:translateY(0)}
 
-/* ───── ABOUT ───── */
+/* ── ABOUT ── */
 #about{background:var(--off)}
 .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
 .about-body p{font-size:.95rem;line-height:1.9;color:var(--t-md);margin-bottom:1.1rem}
 .about-body strong{color:var(--royal);font-weight:600}
-.info-glass{
-  margin-top:1.8rem;
-  background:var(--glass);backdrop-filter:blur(12px);
-  border:1px solid var(--glass-bdr);border-radius:13px;
-  padding:1.25rem;box-shadow:0 4px 18px rgba(37,99,235,.06);
-  display:flex;flex-direction:column;gap:.8rem;
-}
+.info-glass{margin-top:1.8rem;background:var(--glass);backdrop-filter:blur(12px);border:1px solid var(--glass-bdr);border-radius:13px;padding:1.25rem;box-shadow:0 4px 18px rgba(37,99,235,.06);display:flex;flex-direction:column;gap:.8rem}
 .info-row{display:flex;align-items:flex-start;gap:.85rem}
 .info-icon{width:33px;height:33px;border-radius:7px;background:linear-gradient(135deg,var(--bright),var(--navy));display:flex;align-items:center;justify-content:center;color:#fff;font-size:.8rem;flex-shrink:0}
 .info-lbl{font-size:.6rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--t-lt);font-weight:600;margin-bottom:.14rem}
 .info-val{font-size:.87rem;color:var(--t-dk);font-weight:500}
-
-.about-card{
-  background:linear-gradient(135deg,var(--navy) 0%,var(--royal) 100%);
-  border-radius:20px;padding:2.4rem;color:#fff;
-  box-shadow:0 18px 55px rgba(11,37,89,.14);
-  position:relative;overflow:hidden;
-}
+.about-card{background:linear-gradient(135deg,var(--navy) 0%,var(--royal) 100%);border-radius:20px;padding:2.4rem;color:#fff;box-shadow:0 18px 55px rgba(11,37,89,.14);position:relative;overflow:hidden}
 .about-card::before{content:'';position:absolute;top:-40px;right:-40px;width:180px;height:180px;background:rgba(255,255,255,.04);border-radius:50%}
 .about-card::after{content:'';position:absolute;bottom:-60px;left:-30px;width:220px;height:220px;background:rgba(255,255,255,.03);border-radius:50%}
-.ac-label{font-size:.62px;text-transform:uppercase;letter-spacing:2.5px;color:var(--pale);font-weight:600;margin-bottom:.8rem;font-size:.62rem}
-.ac-heading{font-family:'Playfair Display',serif;font-size:2rem;font-weight:800;line-height:1.14;margin-bottom:.5rem}
+.ac-label{font-size:.62rem;text-transform:uppercase;letter-spacing:2.5px;color:var(--pale);font-weight:600;margin-bottom:.8rem}
+.ac-heading{font-family:'Cormorant Garant',serif;font-size:2.1rem;font-weight:800;line-height:1.12;margin-bottom:.5rem;letter-spacing:-.3px}
 .ac-note{font-size:.8rem;color:rgba(255,255,255,.48);font-style:italic;margin-bottom:1.3rem;line-height:1.72}
 .ac-tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1.55rem}
 .ac-tag{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);padding:.24rem .62rem;border-radius:100px;font-size:.68rem;color:rgba(255,255,255,.68)}
 .ac-stats{display:flex;padding-top:1.25rem;border-top:1px solid rgba(255,255,255,.1)}
 .ac-stat{flex:1;text-align:center}
 .ac-stat+.ac-stat{border-left:1px solid rgba(255,255,255,.1)}
-.ac-num{font-family:'Playfair Display',serif;font-size:1.65rem;font-weight:700;color:#fff;line-height:1}
+.ac-num{font-family:'Cormorant Garant',serif;font-size:1.75rem;font-weight:800;color:#fff;line-height:1;letter-spacing:-1px}
 .ac-lbl{font-size:.57rem;color:rgba(255,255,255,.36);text-transform:uppercase;letter-spacing:1.1px;margin-top:.2rem}
 
-/* ───── SESSION 58 ───── */
+/* ── SESSION 58 ── */
 #session{background:#fff}
-.bearers-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.1rem;margin-top:2.5rem}
-.bearer-card{
-  background:var(--off);border:1px solid var(--bdr);
-  border-radius:15px;padding:1.7rem 1.2rem;text-align:center;
-  transition:all .28s;position:relative;overflow:hidden;
-}
+.bearers-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.1rem;margin-top:2.4rem}
+.bearer-card{background:var(--off);border:1px solid var(--bdr);border-radius:15px;padding:1.6rem 1.2rem;text-align:center;transition:all .28s;position:relative;overflow:hidden}
 .bearer-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(to right,var(--bright),var(--mid))}
 .bearer-card:hover{transform:translateY(-5px);box-shadow:0 12px 32px rgba(37,99,235,.1);border-color:var(--mid);background:#fff}
-.b-av{width:52px;height:52px;border-radius:50%;margin:0 auto .85rem;background:linear-gradient(135deg,var(--bright),var(--navy));display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:700;color:#fff}
+.b-av{width:52px;height:52px;border-radius:50%;margin:0 auto .85rem;background:linear-gradient(135deg,var(--bright),var(--navy));display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garant',serif;font-size:1.2rem;font-weight:700;color:#fff}
 .b-role{font-size:.6rem;text-transform:uppercase;letter-spacing:1.9px;color:var(--bright);font-weight:600;margin-bottom:.26rem}
-.b-name{font-family:'Playfair Display',serif;font-size:.98rem;font-weight:600;color:var(--navy);line-height:1.3}
-.ec-wrap{margin-top:2.5rem}
-.ec-title{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;color:var(--navy);margin-bottom:.26rem}
-.ec-sub{font-size:.78rem;color:var(--t-lt);margin-bottom:1.15rem}
+.b-name{font-family:'Cormorant Garant',serif;font-size:1.05rem;font-weight:600;color:var(--navy);line-height:1.3}
+.ec-wrap{margin-top:2.4rem}
+.ec-title{font-family:'Cormorant Garant',serif;font-size:1.3rem;font-weight:700;color:var(--navy);margin-bottom:.26rem}
+.ec-sub{font-size:.78rem;color:var(--t-lt);margin-bottom:1.1rem}
 .ec-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:.85rem}
-.ec-card{
-  background:var(--off);border:1px solid var(--bdr);
-  border-radius:10px;padding:1.15rem .85rem;text-align:center;transition:all .28s;
-}
+.ec-card{background:var(--off);border:1px solid var(--bdr);border-radius:10px;padding:1.1rem .85rem;text-align:center;transition:all .28s}
 .ec-card:hover{background:#fff;border-color:var(--bright);box-shadow:0 4px 14px rgba(37,99,235,.08)}
-.ec-av{width:38px;height:38px;border-radius:50%;margin:0 auto .58rem;background:linear-gradient(135deg,var(--mid),var(--navy));display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:.9rem;font-weight:700;color:#fff}
+.ec-av{width:38px;height:38px;border-radius:50%;margin:0 auto .58rem;background:linear-gradient(135deg,var(--mid),var(--navy));display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garant',serif;font-size:.95rem;font-weight:700;color:#fff}
 .ec-name{font-size:.76rem;font-weight:600;color:var(--navy);line-height:1.35}
 
-/* ───── PROGRAMMES ───── */
+/* ── PROGRAMMES ── */
 #programmes{background:var(--navy)}
 #programmes .s-label{color:rgba(219,234,254,.65)}
 #programmes .s-title{color:#fff}
 .prog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem;margin-top:2.5rem}
-.prog-card{
-  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);
-  border-radius:15px;padding:1.8rem;transition:all .35s;
-}
+.prog-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:15px;padding:1.8rem;transition:all .35s}
 .prog-card:hover{background:rgba(37,99,235,.15);border-color:rgba(147,197,253,.28);transform:translateY(-4px)}
 .prog-icon{font-size:1.7rem;margin-bottom:.8rem}
-.prog-name{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:600;color:#fff;margin-bottom:.35rem}
+.prog-name{font-family:'Cormorant Garant',serif;font-size:1.2rem;font-weight:600;color:#fff;margin-bottom:.35rem}
 .prog-desc{font-size:.78rem;color:rgba(255,255,255,.4);line-height:1.72}
-
-/* ─── MEMORIAL LECTURE — Gold Treatment ─── */
 .memorial-row{display:grid;grid-template-columns:1fr 1fr;gap:1.1rem;margin-top:1.8rem}
-.mem-card{
-  background:var(--gold-glow);
-  border:1px solid rgba(201,168,76,.3);
-  border-radius:15px;padding:1.85rem;
-  position:relative;overflow:hidden;
-}
-/* gold top accent line */
-.mem-card::before{
-  content:'';position:absolute;top:0;left:0;right:0;height:2px;
-  background:linear-gradient(to right,var(--gold),rgba(201,168,76,.2));
-}
-/* subtle gold shimmer orb */
-.mem-card::after{
-  content:'';position:absolute;top:-30px;right:-30px;
-  width:120px;height:120px;
-  background:radial-gradient(circle,rgba(201,168,76,.12) 0%,transparent 70%);
-  border-radius:50%;pointer-events:none;
-}
+.mem-card{background:var(--gold-glow);border:1px solid rgba(201,168,76,.3);border-radius:15px;padding:1.85rem;position:relative;overflow:hidden}
+.mem-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(to right,var(--gold),rgba(201,168,76,.2))}
+.mem-card::after{content:'';position:absolute;top:-30px;right:-30px;width:120px;height:120px;background:radial-gradient(circle,rgba(201,168,76,.12) 0%,transparent 70%);border-radius:50%;pointer-events:none}
 .mem-lbl{font-size:.6rem;text-transform:uppercase;letter-spacing:2.4px;color:var(--gold);font-weight:600;margin-bottom:.48rem}
-.mem-name{font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:700;color:var(--gold-lt);margin-bottom:.32rem}
+.mem-name{font-family:'Cormorant Garant',serif;font-size:1.2rem;font-weight:700;color:var(--gold-lt);margin-bottom:.32rem}
 .mem-note{font-size:.77rem;color:rgba(255,255,255,.36);line-height:1.68}
 
-/* ───── PROCEEDINGS ───── */
-#proceedings{background:var(--off);padding:6rem 0}
-.proc-header{padding:0 4rem;max-width:1200px;margin:0 auto 2.8rem;display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+/* ── PROCEEDINGS ── */
+#proceedings{background:var(--off);padding:5rem 0}
+.proc-header{padding:0 4rem;max-width:1200px;margin:0 auto 2.5rem;display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:1rem}
 .live-pill{display:flex;align-items:center;gap:.48rem;background:#fff;border:1px solid var(--bdr);border-radius:100px;padding:.36rem .88rem;box-shadow:0 2px 8px rgba(37,99,235,.07)}
 .live-dot{width:6px;height:6px;border-radius:50%;background:#22c55e;animation:blink 1.5s ease infinite;flex-shrink:0}
 .live-text{font-size:.7rem;font-weight:600;color:var(--royal);letter-spacing:.4px}
 .proc-current{max-width:1200px;margin:0 auto;padding:0 4rem}
 .proc-split{display:grid;grid-template-columns:1fr 1fr;gap:1.4rem}
-.proc-panel{
-  background:#fff;border-radius:17px;overflow:hidden;
-  border:1px solid var(--bdr);box-shadow:0 6px 26px rgba(37,99,235,.06);
-  transition:all .28s;display:flex;flex-direction:column;
-}
-.proc-panel:hover{box-shadow:0 14px 42px rgba(37,99,235,.1);transform:translateY(-3px)}
-.proc-panel-top{padding:.95rem 1.6rem;border-bottom:1px solid var(--bdr);display:flex;align-items:center;gap:.52rem}
-.p-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+
+/* WHITE cards — clean, prominent */
+.proc-panel{background:#fff;border-radius:16px;overflow:hidden;border:1px solid #e2e8f0;box-shadow:0 4px 24px rgba(11,37,89,.08);transition:all .28s;display:flex;flex-direction:column}
+.proc-panel:hover{box-shadow:0 12px 40px rgba(11,37,89,.12);transform:translateY(-3px)}
+.proc-panel-top{padding:.9rem 1.4rem;border-bottom:1px solid #f1f5f9;display:flex;align-items:center;gap:.52rem;background:#fff}
+.p-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
 .p-dot.inv{background:#F59E0B}
 .p-dot.pho{background:var(--bright)}
-.p-lbl{font-size:.66rem;font-weight:600;text-transform:uppercase;letter-spacing:1.9px;color:var(--t-lt)}
+.p-lbl{font-size:.66rem;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--t-md)}
 .proc-img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block}
-.proc-placeholder{
-  aspect-ratio:4/3;display:flex;flex-direction:column;
-  align-items:center;justify-content:center;gap:.8rem;
-  background:linear-gradient(135deg,var(--off),var(--pale));color:var(--t-lt);
-}
+.proc-placeholder{aspect-ratio:4/3;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.8rem;background:linear-gradient(135deg,#f9fafb,#eff6ff);color:var(--t-lt)}
 .ph-icon{font-size:2.2rem;opacity:.26}
-.ph-t1{font-family:'Playfair Display',serif;font-size:.92rem;color:var(--t-lt)}
+.ph-t1{font-family:'Cormorant Garant',serif;font-size:.95rem;color:var(--t-lt)}
 .ph-t2{font-size:.7rem;color:var(--t-lt);opacity:.6;font-style:italic;text-align:center;padding:0 2rem;line-height:1.65}
-.proc-panel-bot{padding:.95rem 1.6rem;display:flex;align-items:center;justify-content:space-between}
-.proc-week{font-family:'Playfair Display',serif;font-size:.98rem;font-weight:600;color:var(--navy)}
-.proc-sess{font-size:.62rem;color:var(--t-lt);text-transform:uppercase;letter-spacing:1px}
-.proc-archive{max-width:1200px;margin:2.5rem auto 0;padding:0 4rem}
-.arch-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.2rem;padding-top:2rem;border-top:1px solid var(--bdr)}
-.arch-title{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:600;color:var(--navy)}
-.arch-count{font-size:.68rem;color:var(--t-lt);letter-spacing:1px;text-transform:uppercase}
-.arch-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:.9rem}
-.arch-item{background:#fff;border-radius:11px;overflow:hidden;border:1px solid var(--bdr);transition:all .28s}
-.arch-item:hover{box-shadow:0 6px 20px rgba(37,99,235,.09);transform:translateY(-3px)}
-.arch-img-wrap{position:relative;aspect-ratio:4/3;overflow:hidden}
-.arch-img-wrap img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
-.arch-item:hover .arch-img-wrap img{transform:scale(1.06)}
-.arch-badge{position:absolute;top:.45rem;right:.45rem;background:rgba(11,37,89,.8);border-radius:4px;padding:.16rem .42rem;font-size:.58rem;color:#fff;font-weight:600}
-.arch-lbl{padding:.62rem .82rem;display:flex;align-items:center;justify-content:space-between}
-.arch-week{font-family:'Playfair Display',serif;font-size:.85rem;font-weight:600;color:var(--navy)}
-.arch-type{font-size:.58rem;color:var(--t-lt);text-transform:uppercase;letter-spacing:1px}
-.proc-empty{text-align:center;padding:5rem 2rem}
+.proc-panel-bot{padding:.9rem 1.4rem;display:flex;align-items:center;justify-content:space-between;background:#fff}
+.proc-week{font-family:'Cormorant Garant',serif;font-size:1.05rem;font-weight:700;color:var(--navy)}
+.proc-sess{font-size:.62rem;color:var(--t-lt);text-transform:uppercase;letter-spacing:1.1px}
+
+/* ── ARCHIVE CAROUSEL ── */
+.proc-archive-wrap{max-width:1200px;margin:2.5rem auto 0;padding:0 4rem}
+.arch-hdr{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.5rem;margin-bottom:1.2rem;padding-top:2rem;border-top:1px solid var(--bdr)}
+.arch-title{font-family:'Cormorant Garant',serif;font-size:1.2rem;font-weight:700;color:var(--navy)}
+.arch-count{font-size:.65rem;color:var(--t-lt);letter-spacing:1px;text-transform:uppercase}
+.car-outer{display:flex;align-items:center;gap:.6rem}
+.car-viewport{flex:1;overflow:hidden}
+.car-track{display:flex;gap:1rem;transition:transform .42s cubic-bezier(.25,.46,.45,.94)}
+.car-item{flex-shrink:0;width:190px;background:#fff;border-radius:12px;overflow:hidden;border:1px solid #e2e8f0;cursor:pointer;transition:all .28s}
+.car-item:hover{transform:translateY(-4px);box-shadow:0 8px 26px rgba(37,99,235,.12);border-color:var(--bright)}
+.car-item-img{position:relative;aspect-ratio:4/3;overflow:hidden}
+.car-item-img img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
+.car-item:hover .car-item-img img{transform:scale(1.06)}
+.car-badge{position:absolute;top:.4rem;left:.4rem;background:var(--navy);color:#fff;font-size:.6rem;font-weight:700;padding:.18rem .5rem;border-radius:4px;letter-spacing:.4px}
+.car-item-bot{padding:.6rem .8rem;display:flex;align-items:center;justify-content:space-between}
+.car-week-lbl{font-family:'Cormorant Garant',serif;font-size:.9rem;font-weight:700;color:var(--navy)}
+.car-view-lbl{font-size:.58rem;color:var(--bright);text-transform:uppercase;letter-spacing:1px}
+.car-no-img{aspect-ratio:4/3;background:var(--off);display:flex;align-items:center;justify-content:center;color:var(--t-lt);font-size:.75rem}
+.car-btn{flex-shrink:0;width:36px;height:36px;border-radius:50%;background:#fff;border:1px solid var(--bdr);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.2rem;color:var(--navy);box-shadow:0 2px 8px rgba(0,0,0,.07);transition:all .22s;line-height:1}
+.car-btn:hover{background:var(--pale);border-color:var(--bright);color:var(--bright)}
+.car-btn:disabled{opacity:.3;cursor:default;pointer-events:none}
+
+.proc-empty{text-align:center;padding:4rem 2rem}
 .proc-empty-icon{font-size:2.6rem;opacity:.18;margin-bottom:.85rem}
-.proc-empty-title{font-family:'Playfair Display',serif;font-size:1.35rem;color:var(--t-lt);margin-bottom:.5rem}
+.proc-empty-title{font-family:'Cormorant Garant',serif;font-size:1.4rem;color:var(--t-lt);margin-bottom:.5rem}
 .proc-empty-text{font-size:.78rem;color:var(--t-lt);line-height:1.82;max-width:370px;margin:0 auto}
 
-/* ───── CONTACT ───── */
-#contact{background:#fff}
-.contact-grid{
-  display:grid;grid-template-columns:1fr 1fr;gap:4rem;
-  margin-top:2.5rem;align-items:start;
-}
+/* ── WEEK MODAL ── */
+.wk-modal{display:none;position:fixed;inset:0;z-index:2000;align-items:center;justify-content:center;padding:1.5rem}
+.wk-modal.open{display:flex}
+.wk-backdrop{position:absolute;inset:0;background:rgba(11,37,89,.72);backdrop-filter:blur(4px)}
+.wk-box{position:relative;z-index:1;background:#fff;border-radius:20px;width:100%;max-width:920px;max-height:90vh;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.25);display:flex;flex-direction:column}
+.wk-hdr{display:flex;align-items:center;justify-content:space-between;padding:1.2rem 1.8rem;border-bottom:1px solid #f1f5f9;flex-shrink:0}
+.wk-title{font-family:'Cormorant Garant',serif;font-size:1.4rem;font-weight:700;color:var(--navy)}
+.wk-close{width:34px;height:34px;border-radius:50%;background:var(--off);border:1px solid var(--bdr);cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;color:var(--t-md);transition:all .2s}
+.wk-close:hover{background:var(--pale);border-color:var(--bright);color:var(--bright)}
+.wk-panels{display:grid;grid-template-columns:1fr 1fr;flex:1;overflow-y:auto}
+.wk-panel{display:flex;flex-direction:column}
+.wk-panel+.wk-panel{border-left:1px solid #f1f5f9}
+.wk-panel-lbl{padding:.7rem 1.2rem;font-size:.64rem;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--t-lt);border-bottom:1px solid #f1f5f9;flex-shrink:0;background:#fafafa}
+.wk-panel img{width:100%;display:block;object-fit:contain;max-height:500px}
+.wk-no-img{flex:1;display:flex;align-items:center;justify-content:center;background:var(--off);color:var(--t-lt);font-size:.8rem;min-height:200px;font-style:italic}
+
+/* ── PAST SESSIONS ── */
+.past-sessions-section{background:#fff;padding:4rem}
+.past-sessions-inner{max-width:1200px;margin:0 auto}
+.past-sess-hdr{display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-bottom:2rem}
+.past-sess-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:.9rem}
+.ps-card{display:flex;flex-direction:column;align-items:center;justify-content:center;background:#fff;border:1px solid var(--bdr);border-radius:13px;padding:1.5rem .8rem;text-decoration:none;transition:all .28s;text-align:center;position:relative;overflow:hidden}
+.ps-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(to right,var(--bright),var(--mid))}
+.ps-card:hover{transform:translateY(-4px);border-color:var(--bright);box-shadow:0 8px 24px rgba(37,99,235,.12)}
+.ps-num{font-family:'Cormorant Garant',serif;font-size:1.45rem;font-weight:800;color:var(--navy);line-height:1;margin-bottom:.3rem;letter-spacing:-1px}
+.ps-plat{font-size:.62rem;color:var(--t-lt);text-transform:uppercase;letter-spacing:1.5px;font-weight:600}
+.ps-arr{font-size:.9rem;color:var(--bright);margin-top:.5rem;transition:transform .2s}
+.ps-card:hover .ps-arr{transform:translateX(3px)}
+
+/* ── CONTACT ── */
+#contact{background:var(--off)}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;margin-top:2.5rem;align-items:start}
 .c-cards{display:flex;flex-direction:column;gap:.85rem}
-.c-card{
-  display:flex;gap:.95rem;align-items:flex-start;padding:1.15rem;
-  background:var(--off);border-radius:11px;border:1px solid var(--bdr);transition:all .28s;
-}
-.c-card:hover{border-color:var(--bright);background:#fff;box-shadow:0 4px 14px rgba(37,99,235,.07)}
+.c-card{display:flex;gap:.95rem;align-items:flex-start;padding:1.15rem;background:#fff;border-radius:11px;border:1px solid var(--bdr);transition:all .28s}
+.c-card:hover{border-color:var(--bright);box-shadow:0 4px 14px rgba(37,99,235,.07)}
 .c-icon{width:36px;height:36px;border-radius:7px;background:linear-gradient(135deg,var(--bright),var(--navy));display:flex;align-items:center;justify-content:center;color:#fff;font-size:.84rem;flex-shrink:0}
 .c-lbl{font-size:.6rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--t-lt);font-weight:600;margin-bottom:.14rem}
 .c-val{font-size:.86rem;color:var(--t-dk);font-weight:500;line-height:1.58}
-.c-val a{color:var(--bright);text-decoration:none}
+.c-val a{color:var(--bright);text-decoration:none;word-break:break-all}
 .c-val a:hover{text-decoration:underline}
 .soc-row{display:flex;gap:.65rem;flex-wrap:wrap}
 .soc-btn{display:flex;align-items:center;gap:.48rem;padding:.52rem .85rem;border-radius:8px;text-decoration:none;font-size:.76rem;font-weight:600;transition:all .28s}
@@ -363,58 +262,30 @@ section{padding:6rem 4rem}
 .soc-btn.fb:hover{background:#1565d8;transform:translateY(-2px)}
 .soc-btn.ig{background:linear-gradient(135deg,#833AB4,#E1306C,#F77737);color:#fff}
 .soc-btn.ig:hover{opacity:.9;transform:translateY(-2px)}
-
-/* RIGHT column — Join CTA (properly positioned as grid 2nd column) */
-.join-cta{
-  background:linear-gradient(135deg,var(--navy),var(--royal));
-  border-radius:18px;padding:2.4rem;color:#fff;
-  position:relative;overflow:hidden;
-}
+.soc-btn.lt{background:#43d854;color:#0a2200;font-weight:700}
+.soc-btn.lt:hover{background:#2ec940;transform:translateY(-2px)}
+.join-cta{background:linear-gradient(135deg,var(--navy),var(--royal));border-radius:18px;padding:2.4rem;color:#fff;position:relative;overflow:hidden}
 .join-cta::before{content:'';position:absolute;top:-55px;right:-55px;width:200px;height:200px;background:rgba(255,255,255,.04);border-radius:50%}
-.join-cta h3{font-family:'Playfair Display',serif;font-size:1.7rem;font-weight:700;line-height:1.18;margin-bottom:.8rem}
+.join-cta h3{font-family:'Cormorant Garant',serif;font-size:1.9rem;font-weight:700;line-height:1.15;margin-bottom:.85rem;letter-spacing:-.2px}
 .join-cta p{font-size:.84rem;color:rgba(255,255,255,.58);line-height:1.82;margin-bottom:1rem}
 .cta-bullets{display:flex;flex-direction:column;gap:.52rem;margin-bottom:1.55rem}
 .cta-bullet{display:flex;align-items:center;gap:.62rem;color:rgba(255,255,255,.7);font-size:.82rem}
 .cta-bullet span{color:var(--pale);font-weight:700}
-.btn-white{
-  background:#fff;color:var(--navy);text-decoration:none;
-  padding:.76rem 1.5rem;border-radius:8px;font-weight:600;font-size:.84rem;
-  display:inline-flex;align-items:center;gap:.45rem;transition:all .28s;
-}
+.btn-white{background:#fff;color:var(--navy);text-decoration:none;padding:.78rem 1.5rem;border-radius:8px;font-weight:600;font-size:.84rem;display:inline-flex;align-items:center;gap:.5rem;transition:all .28s;flex-wrap:wrap}
 .btn-white:hover{background:var(--pale);transform:translateY(-2px)}
+.btn-num{white-space:nowrap}
 
-/* ───── FOOTER — 3-column organized ───── */
+/* ── FOOTER ── */
 footer{background:var(--navy);padding:3rem 4rem 1.6rem}
-.footer-grid{
-  display:grid;grid-template-columns:1.6fr 1fr 1fr;
-  gap:3rem;padding-bottom:2rem;margin-bottom:1.8rem;
-  border-bottom:1px solid rgba(255,255,255,.07);
-}
-.f-logo{
-  font-family:'Playfair Display',serif;font-size:1.05rem;
-  font-weight:700;color:#fff;margin-bottom:.3rem;
-}
-.f-tagline{
-  font-size:.58rem;color:rgba(255,255,255,.3);
-  letter-spacing:2px;text-transform:uppercase;margin-bottom:.9rem;
-}
-.f-desc{
-  font-size:.78rem;color:rgba(255,255,255,.35);
-  line-height:1.8;margin-bottom:1.1rem;max-width:240px;
-}
+.footer-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:3rem;padding-bottom:2rem;margin-bottom:1.8rem;border-bottom:1px solid rgba(255,255,255,.07)}
+.f-logo{font-family:'Cormorant Garant',serif;font-size:1.15rem;font-weight:700;color:#fff;margin-bottom:.3rem}
+.f-tagline{font-size:.58rem;color:rgba(255,255,255,.3);letter-spacing:2px;text-transform:uppercase;margin-bottom:.9rem}
+.f-desc{font-size:.78rem;color:rgba(255,255,255,.35);line-height:1.8;margin-bottom:1.1rem;max-width:240px}
 .f-socials{display:flex;gap:.5rem}
-.f-soc{
-  width:30px;height:30px;border-radius:6px;
-  border:1px solid rgba(255,255,255,.12);
-  display:flex;align-items:center;justify-content:center;
-  text-decoration:none;transition:all .22s;
-}
+.f-soc{width:30px;height:30px;border-radius:6px;border:1px solid rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;text-decoration:none;transition:all .22s}
 .f-soc:hover{background:rgba(255,255,255,.09);border-color:rgba(255,255,255,.28)}
 .f-soc svg{width:12px;height:12px;fill:rgba(255,255,255,.52)}
-.f-col-title{
-  font-size:.6rem;text-transform:uppercase;letter-spacing:2.2px;
-  color:rgba(255,255,255,.3);font-weight:600;margin-bottom:.9rem;
-}
+.f-col-title{font-size:.6rem;text-transform:uppercase;letter-spacing:2.2px;color:rgba(255,255,255,.3);font-weight:600;margin-bottom:.9rem}
 .f-links{list-style:none;display:flex;flex-direction:column;gap:.55rem}
 .f-links a{text-decoration:none;font-size:.8rem;color:rgba(255,255,255,.48);transition:color .2s}
 .f-links a:hover{color:rgba(255,255,255,.82)}
@@ -423,65 +294,88 @@ footer{background:var(--navy);padding:3rem 4rem 1.6rem}
 .f-sess-lbl{font-size:.58rem;text-transform:uppercase;letter-spacing:1.7px;color:rgba(255,255,255,.28);font-weight:600}
 .f-sess-val{font-size:.8rem;color:rgba(255,255,255,.55)}
 .f-sess-val strong{color:var(--pale)}
-.footer-bottom{
-  display:flex;align-items:center;justify-content:space-between;
-  flex-wrap:wrap;gap:.8rem;
-}
-.footer-copy{font-size:.7rem;color:rgba(255,255,255,.2)}
-/* URGE credit — subtle, links to LinkedIn */
-.urge-link{
-  font-size:.66rem;color:rgba(255,255,255,.22);
-  text-decoration:none;font-style:italic;letter-spacing:.3px;
-  transition:color .22s;
-}
+.footer-bottom{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.8rem}
+.footer-copy{font-size:.72rem;color:rgba(255,255,255,.22)}
+.urge-link{font-size:.8rem;color:rgba(255,255,255,.42);text-decoration:none;font-style:italic;letter-spacing:.3px;transition:color .22s}
 .urge-link:hover{color:var(--gold)}
 
-/* ───── RESPONSIVE ───── */
+/* ── RESPONSIVE ── */
 @media(max-width:1024px){
   #hero{grid-template-columns:1fr;min-height:auto}
   .hero-right{display:none}
-  .hero-left{padding:4rem 2rem;justify-content:center;min-height:calc(100vh - 62px)}
+  .hero-left{padding:4rem 2rem;justify-content:center;min-height:calc(100vh - 68px)}
   .stats-band{padding:2rem 2.5rem;flex-wrap:wrap;gap:1.5rem}
   .sb-item{min-width:44%;max-width:none}
   .sb-item+.sb-item::before{display:none}
+  .about-grid{grid-template-columns:1fr 1fr;gap:3rem}
   .bearers-grid{grid-template-columns:repeat(2,1fr)}
   .ec-grid{grid-template-columns:repeat(3,1fr)}
   .prog-grid{grid-template-columns:repeat(2,1fr)}
   .memorial-row{grid-template-columns:1fr}
   .proc-split{grid-template-columns:1fr}
+  .past-sess-grid{grid-template-columns:repeat(3,1fr)}
   .contact-grid{grid-template-columns:1fr;gap:2rem}
   .footer-grid{grid-template-columns:1fr 1fr;gap:2rem}
+  .wk-panels{grid-template-columns:1fr}
+  .wk-panel+.wk-panel{border-left:none;border-top:1px solid #f1f5f9}
 }
 @media(max-width:768px){
-  nav{padding:0 1.5rem;border-top-width:2px}
+  nav{padding:0 1.5rem;border-top-width:2px;height:60px}
   .nav-links,.nav-cta{display:none}
   .hamburger{display:flex}
-  section{padding:4rem 1.5rem}
-  #proceedings{padding:4rem 0}
-  .proc-header,.proc-current,.proc-archive{padding:0 1.5rem}
+  section{padding:3.5rem 1.5rem}
+  .past-sessions-section{padding:3rem 1.5rem}
+  #proceedings{padding:3.5rem 0}
+  .proc-header,.proc-current,.proc-archive-wrap{padding:0 1.5rem}
   .about-grid{grid-template-columns:1fr;gap:2rem}
   .prog-grid{grid-template-columns:1fr}
   .stats-band{padding:1.5rem}
+  .past-sess-grid{grid-template-columns:repeat(2,1fr)}
   footer{padding:2.2rem 1.5rem 1.2rem}
   .footer-grid{grid-template-columns:1fr;gap:1.6rem}
 }
 @media(max-width:480px){
-  .hero-title{font-size:2.5rem}
+  .hero-title{font-size:2.6rem}
   .hero-btns{flex-direction:column;align-items:flex-start}
   .hero-stats{flex-direction:column}
   .stat+.stat{border-left:none;border-top:1px solid var(--bdr)}
   .bearers-grid{grid-template-columns:repeat(2,1fr)}
   .ec-grid{grid-template-columns:repeat(2,1fr)}
-  .arch-grid{grid-template-columns:repeat(2,1fr)}
+  .btn-white{font-size:.8rem;padding:.72rem 1.2rem}
+  .btn-num{display:block;font-size:.76rem;opacity:.85}
+  .past-sess-grid{grid-template-columns:repeat(2,1fr)}
   .footer-bottom{flex-direction:column;align-items:flex-start;gap:.5rem}
 }
 </style>
 </head>
 <body>
 
+<!-- ── WEEK MODAL ── -->
+<div id="weekModal" class="wk-modal">
+  <div class="wk-backdrop" onclick="closeWeekModal()"></div>
+  <div class="wk-box">
+    <div class="wk-hdr">
+      <div class="wk-title" id="wkTitle">Session 58 &middot; Week 01</div>
+      <button class="wk-close" onclick="closeWeekModal()">&#x2715;</button>
+    </div>
+    <div class="wk-panels">
+      <div class="wk-panel">
+        <div class="wk-panel-lbl">&#x1F4CB;&nbsp; Invitation</div>
+        <img id="wkInvite" src="" alt="Invitation">
+        <div id="wkNoInvite" class="wk-no-img" style="display:none">No invitation uploaded</div>
+      </div>
+      <div class="wk-panel">
+        <div class="wk-panel-lbl">&#x1F4F8;&nbsp; Photograph</div>
+        <img id="wkPhoto" src="" alt="Photograph">
+        <div id="wkNoPhoto" class="wk-no-img" style="display:none">No photograph uploaded</div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- MOBILE MENU -->
 <div class="mobile-menu" id="mobileMenu">
-  <button class="m-close" onclick="closeMobile()">✕</button>
+  <button class="m-close" onclick="closeMobile()">&#x2715;</button>
   <a href="#about"       onclick="closeMobile()">About</a>
   <a href="#session"     onclick="closeMobile()">Session 58</a>
   <a href="#programmes"  onclick="closeMobile()">Programmes</a>
@@ -529,23 +423,22 @@ footer{background:var(--navy);padding:3rem 4rem 1.6rem}
         <div class="stat"><div class="stat-n">2500+</div><div class="stat-l">Programs</div></div>
       </div>
       <div class="hero-btns">
-        <a href="#contact" class="btn-primary">&#x2736; Join ILS Free</a>
+        <a href="#contact" class="btn-primary">&#x2736; Join ILS</a>
         <a href="#about"   class="btn-secondary">Discover More</a>
       </div>
     </div>
   </div>
   <div class="hero-right">
-    <img src="images/hero-bg.png" class="hero-right-img" alt="ILS Boardroom"
+    <img src="images/hero-bg.png" class="hero-right-img" alt="ILS"
          onerror="this.style.display='none';this.nextElementSibling.nextElementSibling.style.display='flex'">
     <div class="hero-blend"></div>
     <div class="hero-right-placeholder" style="display:none">
-      <div class="ph-icon">&#x1F3DB;</div>
-      <p>Upload hero-bg.png to images/ folder</p>
+      <div class="ph-icon">&#x1F3DB;</div><p>Upload hero-bg.png to images/ folder</p>
     </div>
   </div>
 </section>
 
-<!-- STATS BAND — large serif numbers on navy, horizontal strip (distinct from rathnavelpon icon-card grid) -->
+<!-- STATS BAND -->
 <div class="stats-band">
   <div class="sb-item"><div class="sb-num">50+</div><div class="sb-lbl">Years of Free Learning</div></div>
   <div class="sb-item"><div class="sb-num">1,000+</div><div class="sb-lbl">Lives Shaped</div></div>
@@ -641,8 +534,6 @@ footer{background:var(--navy);padding:3rem 4rem 1.6rem}
       <div class="prog-card"><div class="prog-icon">&#x1F9E0;</div><div class="prog-name">Quiz</div><div class="prog-desc">Knowledge meets adrenaline as our members contest their wisdom and stretch understanding.</div></div>
       <div class="prog-card"><div class="prog-icon">&#x2696;&#xFE0F;</div><div class="prog-name">Debate</div><div class="prog-desc">Structured argumentation that sharpens critical thinking and fosters civil discourse.</div></div>
     </div>
-
-    <!-- Memorial Lectures — gold treatment -->
     <div class="memorial-row fade-up">
       <div class="mem-card">
         <div class="mem-lbl">Annual Memorial Lecture</div>
@@ -671,10 +562,34 @@ footer{background:var(--navy);padding:3rem 4rem 1.6rem}
     </div>
   </div>
   <div class="proc-current fade-up" id="procCurrent"></div>
-  <div id="procArchive"></div>
+  <div id="procArchiveWrap"></div>
 </section>
 
-<!-- CONTACT -->
+<!-- PAST SESSIONS ARCHIVE -->
+<div class="past-sessions-section fade-up">
+  <div class="past-sessions-inner">
+    <div class="past-sess-hdr">
+      <div>
+        <div class="s-label">Session History</div>
+        <h2 class="s-title">Previous Sessions Archive</h2>
+        <div class="s-divider"></div>
+      </div>
+      <a href="https://linktr.ee/ils.coimbatore" target="_blank" rel="noopener" class="btn-primary" style="font-size:.8rem;align-self:flex-start">
+        &#x1F517;&nbsp; View All on Linktree
+      </a>
+    </div>
+    <div class="past-sess-grid">
+      <a href="https://tr.ee/K1lTh5_sLc" target="_blank" rel="noopener" class="ps-card"><div class="ps-num">ILS 57</div><div class="ps-plat">Threads</div><div class="ps-arr">&#x2192;</div></a>
+      <a href="https://tr.ee/EyVgsf6svB" target="_blank" rel="noopener" class="ps-card"><div class="ps-num">ILS 56</div><div class="ps-plat">Instagram</div><div class="ps-arr">&#x2192;</div></a>
+      <a href="https://tr.ee/Xvr2Icfj_c" target="_blank" rel="noopener" class="ps-card"><div class="ps-num">ILS 55</div><div class="ps-plat">Trello</div><div class="ps-arr">&#x2192;</div></a>
+      <a href="https://tr.ee/B5NAAli-Mc" target="_blank" rel="noopener" class="ps-card"><div class="ps-num">ILS 54</div><div class="ps-plat">Padlet</div><div class="ps-arr">&#x2192;</div></a>
+      <a href="https://tr.ee/TgMklf5xRq" target="_blank" rel="noopener" class="ps-card"><div class="ps-num">ILS 52</div><div class="ps-plat">Drive</div><div class="ps-arr">&#x2192;</div></a>
+      <a href="https://tr.ee/_YphhxMsp9" target="_blank" rel="noopener" class="ps-card"><div class="ps-num">ILS 50</div><div class="ps-plat">Facebook</div><div class="ps-arr">&#x2192;</div></a>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT — FULLY FIXED STRUCTURE -->
 <section id="contact">
   <div class="inner">
     <div class="fade-up">
@@ -682,11 +597,11 @@ footer{background:var(--navy);padding:3rem 4rem 1.6rem}
       <h2 class="s-title">Join ILS &middot; Get in Touch</h2>
       <div class="s-divider"></div>
     </div>
-
     <div class="contact-grid">
 
-      <!-- LEFT column: info cards + social -->
+      <!-- LEFT: cards. Properly closed before join-cta. -->
       <div class="c-cards fade-up">
+
         <div class="c-card">
           <div class="c-icon">&#x1F464;</div>
           <div>
@@ -694,6 +609,7 @@ footer{background:var(--navy);padding:3rem 4rem 1.6rem}
             <div class="c-val">Mr. M. Prasath, Director<br><small style="color:var(--t-lt);font-size:.78rem">Contact to join ILS</small></div>
           </div>
         </div>
+
         <div class="c-card">
           <div class="c-icon">&#x1F4CD;</div>
           <div>
@@ -701,6 +617,7 @@ footer{background:var(--navy);padding:3rem 4rem 1.6rem}
             <div class="c-val">Thulasi Pharmacy,<br>R.S. Puram, Coimbatore</div>
           </div>
         </div>
+
         <div class="c-card">
           <div class="c-icon">&#x1F4C5;</div>
           <div>
@@ -708,66 +625,63 @@ footer{background:var(--navy);padding:3rem 4rem 1.6rem}
             <div class="c-val">Every Sunday &middot; 4:00 PM to 6:00 PM<br><small style="color:var(--t-lt);font-size:.78rem">48&ndash;52 proceedings per Session</small></div>
           </div>
         </div>
+
         <div class="c-card">
           <div class="c-icon">&#x1F310;</div>
           <div>
             <div class="c-lbl">Website</div>
             <div class="c-val"><a href="https://ilscoimbatore.in">ilscoimbatore.in</a></div>
           </div>
-          <div class="c-card">
+        </div>
+
+        <div class="c-card">
           <div class="c-icon">&#x2709;&#xFE0F;</div>
           <div>
             <div class="c-lbl">Email Us</div>
-            <div class="c-val">
-              <a href="mailto:instituteofliberalstudies@gmail.com">
-                instituteofliberalstudies@gmail.com
-              </a>
-            </div>
+            <div class="c-val"><a href="mailto:instituteofliberalstudies@gmail.com">instituteofliberalstudies@gmail.com</a></div>
           </div>
         </div>
+
         <div>
           <div class="c-lbl" style="margin-bottom:.6rem">Follow Us</div>
           <div class="soc-row">
             <a href="https://www.facebook.com/ilscoimbatore/" target="_blank" rel="noopener" class="soc-btn fb">
-              <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-              Facebook
+              <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>Facebook
             </a>
             <a href="https://www.instagram.com/ils.coimbatore/" target="_blank" rel="noopener" class="soc-btn ig">
-              <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
-              Instagram
+              <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>Instagram
             </a>
+            <a href="https://linktr.ee/ils.coimbatore" target="_blank" rel="noopener" class="soc-btn lt">&#x1F517; All Links</a>
           </div>
         </div>
-      </div>
-      <!-- ↑ c-cards closing tag — join-cta is now correctly the 2nd grid column -->
 
-      <!-- RIGHT column: Become a Member CTA -->
+      </div>
+      <!-- c-cards properly closed above. join-cta is correctly the 2nd grid column. -->
+
       <div class="join-cta fade-up">
         <h3>Become a Member of ILS</h3>
         <p>ILS is open to all who have the desire to listen, learn, and lead. No fees, no barriers — just a community of curious minds meeting every Sunday.</p>
         <div class="cta-bullets">
-          <div class="cta-bullet"><span>&#x2713;</span> Free lifelong membership for all</div>
+          <div class="cta-bullet"><span>&#x2713;</span> Lifelong membership for all</div>
           <div class="cta-bullet"><span>&#x2713;</span> Every Sunday, 4 PM to 6 PM, R.S. Puram</div>
           <div class="cta-bullet"><span>&#x2713;</span> Open to all ages and backgrounds</div>
           <div class="cta-bullet"><span>&#x2713;</span> Build knowledge and communication</div>
           <div class="cta-bullet"><span>&#x2713;</span> 50+ years of learning community</div>
         </div>
-        <!-- FIXED: tel: link instead of mailto: -->
+        <!-- tel: link, btn-num keeps number on one line -->
         <a href="tel:+919003710180" class="btn-white">
-          &#x1F4DE;&nbsp; Call Director to Join &rarr; +91 9003710180
+          &#x1F4DE;&nbsp; Call Director to Join &rarr; <span class="btn-num">+91 9003710180</span>
         </a>
       </div>
 
-    </div><!-- /contact-grid -->
+    </div>
   </div>
 </section>
 
-<!-- FOOTER — organized 3-column layout -->
+<!-- FOOTER -->
 <footer>
   <div class="footer-grid">
-
-    <!-- Col 1: Brand -->
-    <div class="f-brand">
+    <div>
       <div class="f-logo">ILS &middot; Institute of Liberal Studies</div>
       <div class="f-tagline">Coimbatore, Tamil Nadu &middot; Since 1967</div>
       <p class="f-desc">A gathering of curious minds. Free learning, open doors, and the pursuit of knowledge — every Sunday.</p>
@@ -780,8 +694,6 @@ footer{background:var(--navy);padding:3rem 4rem 1.6rem}
         </a>
       </div>
     </div>
-
-    <!-- Col 2: Navigation -->
     <div>
       <div class="f-col-title">Navigation</div>
       <ul class="f-links">
@@ -792,93 +704,75 @@ footer{background:var(--navy);padding:3rem 4rem 1.6rem}
         <li><a href="#contact">Join ILS</a></li>
       </ul>
     </div>
-
-    <!-- Col 3: Session Info -->
     <div>
       <div class="f-col-title">Session 58</div>
       <div class="f-session-info">
-        <div class="f-sess-item">
-          <div class="f-sess-lbl">Current Session</div>
-          <div class="f-sess-val"><strong>Session 58</strong> &middot; FY 2025&ndash;26</div>
-        </div>
-        <div class="f-sess-item">
-          <div class="f-sess-lbl">Meeting Schedule</div>
-          <div class="f-sess-val">Every Sunday &middot; 4:00 &ndash; 6:00 PM</div>
-        </div>
-        <div class="f-sess-item">
-          <div class="f-sess-lbl">Venue</div>
-          <div class="f-sess-val">Thulasi Pharmacy, R.S. Puram, Coimbatore</div>
-        </div>
-        <div class="f-sess-item">
-          <div class="f-sess-lbl">Membership</div>
-          <div class="f-sess-val">Free &middot; Lifelong &middot; All ages welcome</div>
-        </div>
+        <div class="f-sess-item"><div class="f-sess-lbl">Current Session</div><div class="f-sess-val"><strong>Session 58</strong> &middot; FY 2025&ndash;26</div></div>
+        <div class="f-sess-item"><div class="f-sess-lbl">Meeting Schedule</div><div class="f-sess-val">Every Sunday &middot; 4:00 &ndash; 6:00 PM</div></div>
+        <div class="f-sess-item"><div class="f-sess-lbl">Venue</div><div class="f-sess-val">Thulasi Pharmacy, R.S. Puram, Coimbatore</div></div>
+        <div class="f-sess-item"><div class="f-sess-lbl">Membership</div><div class="f-sess-val">Lifelong &middot; All ages welcome</div></div>
       </div>
     </div>
-
-  </div><!-- /footer-grid -->
-
+  </div>
   <div class="footer-bottom">
     <div class="footer-copy">&copy; 2026 Institute of Liberal Studies, Coimbatore. Dedicated to the pursuit of knowledge and free learning.</div>
-    <!-- FIXED: proper HTML class, links to LinkedIn -->
-    <a href="https://www.linkedin.com/in/raja-parasuraman/"
-       target="_blank" rel="noopener noreferrer"
-       class="urge-link">&copy; URGE (Untiring Raja Gopal Effort)</a>
+    <a href="https://www.linkedin.com/in/raja-parasuraman/" target="_blank" rel="noopener noreferrer" class="urge-link">&copy; URGE (Untiring Raja Gopal Effort)</a>
   </div>
 </footer>
 
 
 <!-- ═══════════════════════════════════════════════════════
-     WEEKLY UPDATE — EDIT ONLY THIS SECTION EACH SUNDAY
+     WEEKLY UPDATE — ADD ONE LINE EACH SUNDAY AT THE BOTTOM
      ───────────────────────────────────────────────────────
-     Add one line per week at the bottom of the array.
-     File can be .png, .jpg, or .jpeg — all work fine.
-     The LAST entry is always shown as "This Week".
-     Skip a week by simply not adding an entry.
+     · The LAST line is always "this week" (shown large).
+     · All earlier lines go into the scrollable carousel.
+     · File names can be anything — just match exactly.
+     · Extensions .png .jpg .jpeg all work.
 
-     Example:
-     { week: 1, invite: 'invite_week_01.png', photo: 'photo_week_01.png' },
+     Example for week 3:
+     { week: 3, invite: 'invite_week_03.png', photo: 'photo_week_03.jpg' },
+
+     If you miss a week, just skip the number. No problem.
 ═══════════════════════════════════════════════════════ -->
 <script>
 const PROCEEDINGS = [
-  // ADD WEEKS HERE — newest at the bottom
   { week: 1, invite: 'invite_week_01.png', photo: 'photo_week_01.png' },
-  // { week: 2, invite: 'invite_week_02.jpg', photo: 'photo_week_02.jpg' },
+  { week: 2, invite: 'invite_week_02.png', photo: 'photo_week_02.jpg' },
+  // { week: 3, invite: 'invite_week_03.png', photo: 'photo_week_03.jpg' },
+  // { week: 4, invite: 'invite_week_04.jpg', photo: 'photo_week_04.jpg' },
 ];
 
+/* ── RENDER ── */
 (function render(){
   const pad = n => String(n).padStart(2,'0');
   const curr = document.getElementById('procCurrent');
-  const arch  = document.getElementById('procArchive');
-  const pill  = document.getElementById('livePill');
+  const archWrap = document.getElementById('procArchiveWrap');
+  const pill = document.getElementById('livePill');
 
-  if(!PROCEEDINGS.length){
-    curr.innerHTML=`<div class="proc-empty">
+  if (!PROCEEDINGS.length) {
+    curr.innerHTML = `<div class="proc-empty">
       <div class="proc-empty-icon">&#x1F4C5;</div>
       <div class="proc-empty-title">First proceeding coming soon</div>
-      <div class="proc-empty-text">Session 58 is now active. Invitations and photographs will appear here after each Sunday meeting.</div>
+      <div class="proc-empty-text">Session 58 is now active. Invitations and photographs will appear here each Sunday.</div>
     </div>`;
     return;
   }
 
-  const latest = PROCEEDINGS[PROCEEDINGS.length-1];
-  const past   = PROCEEDINGS.slice(0,-1).reverse();
+  const latest = PROCEEDINGS[PROCEEDINGS.length - 1];
+  const past   = PROCEEDINGS.slice(0, -1).reverse();
 
   pill.textContent = `Session 58 \u00B7 Week ${latest.week} \u00B7 Live`;
 
-  const panel=(dot,label,file,week,sub)=>`
+  const panel = (dot, label, file, week, sub) => `
     <div class="proc-panel">
-      <div class="proc-panel-top">
-        <div class="p-dot ${dot}"></div>
-        <div class="p-lbl">${label}</div>
-      </div>
+      <div class="proc-panel-top"><div class="p-dot ${dot}"></div><div class="p-lbl">${label}</div></div>
       ${file
-        ?`<img src="images/${file}" class="proc-img" alt="Week ${week}" loading="lazy">`
-        :`<div class="proc-placeholder">
-            <div class="ph-icon">${dot==='inv'?'&#x1F4CB;':'&#x1F4F8;'}</div>
-            <div class="ph-t1">${dot==='inv'?'Invitation':'Photo'} uploading soon</div>
-            <div class="ph-t2">Add the image file to the images/ folder</div>
-          </div>`
+        ? `<img src="images/${file}" class="proc-img" alt="Week ${week}" loading="lazy">`
+        : `<div class="proc-placeholder">
+             <div class="ph-icon">${dot==='inv'?'&#x1F4CB;':'&#x1F4F8;'}</div>
+             <div class="ph-t1">${dot==='inv'?'Invitation':'Photograph'} uploading soon</div>
+             <div class="ph-t2">Upload the image file to the GitHub images/ folder</div>
+           </div>`
       }
       <div class="proc-panel-bot">
         <div class="proc-week">Session 58 &middot; Week ${pad(week)}</div>
@@ -886,51 +780,115 @@ const PROCEEDINGS = [
       </div>
     </div>`;
 
-  curr.innerHTML=`<div class="proc-split">
-    ${panel('inv','This Week\'s Invitation',latest.invite,latest.week,'FY 2025\u201326')}
-    ${panel('pho','This Week\'s Photograph',latest.photo,latest.week,'Thulasi Pharmacy, R.S. Puram')}
+  curr.innerHTML = `<div class="proc-split">
+    ${panel('inv',"This Week's Invitation", latest.invite, latest.week, 'FY 2025\u201326')}
+    ${panel('pho',"This Week's Photograph", latest.photo, latest.week, 'Thulasi Pharmacy, R.S. Puram')}
   </div>`;
 
-  if(past.length){
-    const items=past.map(p=>`
-      <div class="arch-item">
-        <div class="arch-img-wrap">
-          ${p.photo?`<img src="images/${p.photo}" alt="Week ${p.week}" loading="lazy">`:`<div style="aspect-ratio:4/3;background:var(--off);display:flex;align-items:center;justify-content:center;color:var(--t-lt);font-size:.78rem">No photo</div>`}
-          <div class="arch-badge">W${pad(p.week)}</div>
+  if (past.length) {
+    const items = past.map(p => `
+      <div class="car-item" onclick="openWeekModal(${p.week})">
+        <div class="car-item-img">
+          ${p.invite
+            ? `<img src="images/${p.invite}" alt="Week ${p.week}" loading="lazy">`
+            : `<div class="car-no-img">Week ${pad(p.week)}</div>`}
+          <div class="car-badge">W${pad(p.week)}</div>
         </div>
-        <div class="arch-lbl">
-          <div class="arch-week">Week ${pad(p.week)}</div>
-          <div class="arch-type">Session 58</div>
+        <div class="car-item-bot">
+          <div class="car-week-lbl">Week ${pad(p.week)}</div>
+          <div class="car-view-lbl">View &#x2192;</div>
         </div>
       </div>`).join('');
 
-    arch.className='proc-archive fade-up';
-    arch.innerHTML=`
-      <div class="arch-hdr">
-        <div class="arch-title">Past Proceedings &middot; Session 58</div>
-        <div class="arch-count">${past.length} week${past.length>1?'s':''} archived</div>
-      </div>
-      <div class="arch-grid">${items}</div>`;
+    archWrap.innerHTML = `
+      <div class="proc-archive-wrap fade-up">
+        <div class="arch-hdr">
+          <div class="arch-title">Past Proceedings &middot; Session 58</div>
+          <div class="arch-count">${past.length} week${past.length>1?'s':''} &mdash; click any to see invite &amp; photo</div>
+        </div>
+        <div class="car-outer">
+          <button class="car-btn" id="carPrev" onclick="carGo(-1)">&#x2039;</button>
+          <div class="car-viewport" id="carViewport">
+            <div class="car-track" id="carTrack">${items}</div>
+          </div>
+          <button class="car-btn" id="carNext" onclick="carGo(1)">&#x203A;</button>
+        </div>
+      </div>`;
 
-    new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible')}),{threshold:.08}).observe(arch);
+    const el = archWrap.querySelector('.proc-archive-wrap');
+    new IntersectionObserver(e=>{if(e[0].isIntersecting)el.classList.add('visible')},{threshold:.08}).observe(el);
+    initCarousel(past);
   }
 })();
+
+/* ── CAROUSEL ── */
+let _carOff = 0, _carTimer = null;
+const CAR_W = 206;
+
+function initCarousel(past) {
+  updateCarBtns(past.length);
+  _carTimer = setInterval(()=>{ carGo(1); }, 3500);
+}
+
+function carGo(dir) {
+  const vp = document.getElementById('carViewport');
+  const track = document.getElementById('carTrack');
+  if (!vp || !track) return;
+  const past = PROCEEDINGS.slice(0, -1);
+  const maxOff = Math.max(0, (past.length * CAR_W) - vp.offsetWidth);
+  _carOff = Math.max(0, Math.min(maxOff, _carOff + dir * CAR_W));
+  if (dir > 0 && _carOff >= maxOff) _carOff = 0; /* wrap forward */
+  track.style.transform = `translateX(-${_carOff}px)`;
+  updateCarBtns(past.length);
+  clearInterval(_carTimer);
+  _carTimer = setInterval(()=>carGo(1), 3500);
+}
+
+function updateCarBtns(total) {
+  const vp = document.getElementById('carViewport');
+  if (!vp) return;
+  const maxOff = Math.max(0, (total * CAR_W) - vp.offsetWidth);
+  const prev = document.getElementById('carPrev');
+  const next = document.getElementById('carNext');
+  if (prev) prev.disabled = _carOff <= 0;
+  if (next) next.disabled = _carOff >= maxOff;
+}
+
+/* ── MODAL ── */
+function openWeekModal(weekNum) {
+  const pad = n => String(n).padStart(2,'0');
+  const w = PROCEEDINGS.find(p => p.week === weekNum);
+  if (!w) return;
+  document.getElementById('wkTitle').textContent = `Session 58 \u00B7 Week ${pad(weekNum)}`;
+  const inv = document.getElementById('wkInvite');
+  const noInv = document.getElementById('wkNoInvite');
+  if (w.invite) { inv.src=`images/${w.invite}`; inv.style.display='block'; noInv.style.display='none'; }
+  else { inv.style.display='none'; noInv.style.display='flex'; }
+  const pho = document.getElementById('wkPhoto');
+  const noPho = document.getElementById('wkNoPhoto');
+  if (w.photo) { pho.src=`images/${w.photo}`; pho.style.display='block'; noPho.style.display='none'; }
+  else { pho.style.display='none'; noPho.style.display='flex'; }
+  document.getElementById('weekModal').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeWeekModal() {
+  document.getElementById('weekModal').classList.remove('open');
+  document.body.style.overflow='';
+}
+document.addEventListener('keydown', e => { if(e.key==='Escape') closeWeekModal(); });
 </script>
 
 <script>
 window.addEventListener('scroll',()=>{
   document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>20);
 });
-const io=new IntersectionObserver(e=>e.forEach((x,i)=>{
-  if(x.isIntersecting)setTimeout(()=>x.target.classList.add('visible'),i*75)
+const io = new IntersectionObserver(e=>e.forEach((x,i)=>{
+  if(x.isIntersecting) setTimeout(()=>x.target.classList.add('visible'),i*75);
 }),{threshold:.07});
 document.querySelectorAll('.fade-up').forEach(el=>io.observe(el));
-
 function toggleMobile(){
-  const m=document.getElementById('mobileMenu');
-  const h=document.getElementById('hamburger');
-  m.classList.toggle('open');
-  h.classList.toggle('open');
+  const m=document.getElementById('mobileMenu'),h=document.getElementById('hamburger');
+  m.classList.toggle('open');h.classList.toggle('open');
   document.body.style.overflow=m.classList.contains('open')?'hidden':'';
 }
 function closeMobile(){
